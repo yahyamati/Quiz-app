@@ -1,0 +1,28 @@
+import React from 'react'
+import Navbar from './components/Navbar/Navbar'
+import Sidebar from './components/Sidebar/Sidebar'
+import { Routes , Route } from 'react-router-dom'
+import Add from './pages/Add/Add'
+import List from './pages/List/List'
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
+
+
+function App() {
+  const url = "http://localhost:4000"; // Adjust this to your backend URL
+  return (
+      <div>   
+        <ToastContainer />
+        <Navbar />
+        <div className="app-content">
+          <Sidebar />
+          <Routes>
+             <Route path="/add" element={<Add url={url} />} />
+             <Route path="/List" element={<List url={url} />} />
+          </Routes>
+        </div>
+      </div>
+  )
+}
+
+export default App

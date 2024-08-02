@@ -1,0 +1,52 @@
+/* Container for the quiz list */
+.quiz-list {
+    margin: 20px;
+    max-height: 600px; /* Adjust height as needed */
+    overflow-y: auto; /* Enable vertical scrolling */
+    border: 1px solid #ddd; /* Optional: add a border for better visibility */
+    border-radius: 4px; /* Optional: rounded corners */
+    padding: 10px; /* Optional: add padding for spacing */
+    width: 80%; /* Adjust width as needed */
+    max-width: 1200px; /* Optional: set a max-width */
+}
+
+/* Remove default list styles */
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Style for each quiz item */
+.quiz-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f9f9f9; /* Optional: background color for quiz items */
+}
+
+/* Style for quiz information */
+.quiz-info p {
+    margin: 0;
+    padding: 0 10px;
+}
+
+/* Style for the remove button */
+.remove-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #ff0000;
+    font-size: 16px;
+}
+
+/* Style for "no quizzes found" message */
+.no-found {
+    font-size: 18px;
+    color: #999;
+    text-align: center;
+}
