@@ -1,13 +1,15 @@
 /* Container for the quiz list */
 .quiz-list {
-    margin: 20px;
+    margin: 20px auto;
     max-height: 600px; /* Adjust height as needed */
     overflow-y: auto; /* Enable vertical scrolling */
     border: 1px solid #ddd; /* Optional: add a border for better visibility */
     border-radius: 4px; /* Optional: rounded corners */
     padding: 10px; /* Optional: add padding for spacing */
-    width: 80%; /* Adjust width as needed */
+    width: 90%; /* Adjust width to a relative unit for better responsiveness */
     max-width: 1200px; /* Optional: set a max-width */
+    background-color: #fff; /* Background color for the container */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: add a subtle shadow */
 }
 
 /* Remove default list styles */
@@ -27,21 +29,29 @@ ul {
     border: 1px solid #ddd;
     border-radius: 4px;
     background-color: #f9f9f9; /* Optional: background color for quiz items */
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.quiz-item:hover {
+    background-color: #f0f0f0; /* Lighten background on hover */
 }
 
 /* Style for quiz information */
 .quiz-info p {
     margin: 0;
     padding: 0 10px;
+    flex: 1; /* Allow flex items to grow */
 }
 
 /* Style for the remove button */
 .remove-btn {
+    width: 10%;
     background: none;
     border: none;
     cursor: pointer;
     color: #ff0000;
     font-size: 16px;
+    padding: 5px;
 }
 
 /* Style for "no quizzes found" message */
@@ -49,4 +59,41 @@ ul {
     font-size: 18px;
     color: #999;
     text-align: center;
+}
+
+/* Responsive styles */
+@media (max-width: 900px) {
+    .quiz-list {
+        width: 95%; /* Adjust width for smaller screens */
+    }
+
+    .quiz-item {
+        flex-direction: column; /* Stack items vertically */
+        align-items: flex-start; /* Align items to the start */
+    }
+
+    .quiz-info p {
+        padding: 5px 0; /* Reduce padding */
+    }
+
+    .remove-btn {
+        align-self: flex-end; /* Align the remove button to the end */
+    }
+}
+
+@media (max-width: 600px) {
+    .quiz-list {
+        width: 150%; /* Full width for very small screens */
+        margin: 10px; /* Reduce margin */
+        margin-right: 0;
+    }
+
+    .quiz-item {
+        padding: 8px; /* Reduce padding */
+    }
+
+    .remove-btn {
+        font-size: 14px; /* Reduce button size */
+       
+    }
 }

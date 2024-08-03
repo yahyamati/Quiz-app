@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import './Add.css';
@@ -6,9 +6,28 @@ import './Add.css';
 const Add = () => {
   const [questionText, setQuestionText] = useState('');
   const [answerText, setAnswerText] = useState('');
-  const [category, setCategory] = useState('');
+  const [example, setExample] = useState('');
+  const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState('');
 
-  const categories = ['JavaScript', 'Node.js', 'React', 'CSS', 'HTML']; // Define categories here
+  useEffect(() => {
+    // Fetch categories on component mount
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.get('http://localhost:4000/api/quiz/listCategory');
+        if (response.data.success) {
+          setCategories(response.data.data); // Adjust based on response structure
+        } else {
+          toast.error(response.data.message);
+        }
+      } catch (error) {
+        console.error('There was an error fetching the categories!', error);
+        alert('There was an error fetching the categories!');
+      }
+    };
+
+    fetchCategories();
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -16,7 +35,8 @@ const Add = () => {
     const quizData = {
       questionText,
       answerText,
-      category,
+      category: selectedCategory,
+      example
     };
 
     try {
@@ -25,7 +45,8 @@ const Add = () => {
         toast.success(response.data.message);
         setQuestionText('');
         setAnswerText('');
-        setCategory('');
+        setSelectedCategory('');
+        setExample('');
       } else {
         toast.error(response.data.message);
       }
@@ -50,20 +71,28 @@ const Add = () => {
         </div>
         <div>
           <label>Answer:</label>
-          <input
-            type="text"
+          <textarea
             value={answerText}
             onChange={(e) => setAnswerText(e.target.value)}
             required
+            rows="4"
+          />
+        </div>
+        <div>
+          <label>Example (optional):</label>
+          <textarea
+            value={example}
+            onChange={(e) => setExample(e.target.value)}
+            rows="4"
           />
         </div>
         <div>
           <label>Category:</label>
-          <select value={category} onChange={(e) => setCategory(e.target.value)} required>
+          <select value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)} required>
             <option value="">Select a category</option>
             {categories.map((cat) => (
-              <option key={cat} value={cat}>
-                {cat}
+              <option key={cat._id} value={cat._id}>
+                {cat.category}
               </option>
             ))}
           </select>

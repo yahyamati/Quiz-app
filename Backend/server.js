@@ -23,6 +23,7 @@ app.use(cors()) //we can access backend for any frontend
 //api endpoint
 app.use('/api/user',userRouter);
 app.use('/api/quiz', quizRoutes);
+app.use("/images",express.static('uploads'));
 
 
 

@@ -1,53 +1,62 @@
-/* Add this to your CSS file or within a <style> tag in your component */
-div {
-    margin: 20px;
-  }
-  
-  form {
-    display: flex;
-    flex-direction: column;
-    width: 300px;
-  }
-  
-  form div {
-    margin-bottom: 10px;
-  }
-  
-  label {
-    margin-bottom: 5px;
-  }
-  
-  input {
-    padding: 5px;
-    font-size: 16px;
-  }
-  
-  button {
-    padding: 10px;
-    font-size: 16px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #45a049;
-  }
-  
+/* Add.css */
 
-  select {
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: white;
-    color: #333;
-    cursor: pointer;
+div {
+  margin: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+}
+
+form div {
+  margin-bottom: 10px;
+}
+
+label {
+  margin-bottom: 5px;
+}
+
+input, textarea {
+  padding: 5px;
+  font-size: 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+button {
+  padding: 10px;
+  font-size: 16px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+select {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: white;
+  color: #333;
+  cursor: pointer;
+}
+
+/* Add styles for the option elements */
+option {
+  padding: 10px;
+  font-size: 16px;
+}
+
+/* Responsive styles */
+@media (max-width: 600px) {
+  form {
+    width: 100%;
   }
-  
-  /* Add styles for the option elements */
-  option {
-    padding: 10px;
-    font-size: 16px;
-  }
+}

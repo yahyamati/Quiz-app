@@ -13,11 +13,10 @@ const questionSchema = new mongoose.Schema({
 
 const quizSchema = new mongoose.Schema({
   question: questionSchema,
-  category: {
-    type: String,
-    required: true
-  }
+  category: {type: String,required: true },
+  example:{type: String},
 });
+  
 
 const Quiz = mongoose.model('Quiz', quizSchema);
 

@@ -1,10 +1,11 @@
 // Backend/controllers/QuizController.js
 
-import Quiz from '../models/quizModel.js';
+import Quiz from '../models/QuizModel.js';
+import Category from '../models/categoryModel.js';
 
 // Add a quiz
 const addQuiz = async (req, res) => {
-  const { questionText, answerText, category } = req.body;
+  const { questionText, answerText, category , example } = req.body;
 
   if (!category) {
     return res.json({ success: false, message: 'Category is required' });
@@ -18,7 +19,8 @@ const addQuiz = async (req, res) => {
           text: answerText
         }
       },
-      category
+      category,
+      example
     });
 
     await quiz.save();
@@ -53,4 +55,37 @@ const removeQuiz = async (req, res) => {
   }
 };
 
-export { addQuiz, listQuizzes, removeQuiz };
+
+const addCategory = async (req, res) => {
+  if (!req.file) {
+    return res.status(400).json({ success: false, message: 'No image file uploaded' });
+  }
+
+  const image_filename = req.file.filename;
+
+  const category = new Category({
+    category: req.body.category,
+    image: image_filename
+  });
+
+  try {
+    await category.save();
+    res.json({ success: true, message: 'Category added successfully' });
+  } catch (error) {
+    console.error('Error adding category:', error);
+    res.status(500).json({ success: false, message: 'Error adding category' });
+  }
+};
+
+
+const listCategories = async (req, res) => {
+  try {
+    const categories = await Category.find({});
+    res.json({ success: true, data: categories });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: 'Error retrieving categories' });
+  }
+};
+
+export { addQuiz, listQuizzes, removeQuiz, addCategory ,listCategories };
