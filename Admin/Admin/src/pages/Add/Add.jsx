@@ -8,7 +8,7 @@ const Add = () => {
   const [answerText, setAnswerText] = useState('');
   const [example, setExample] = useState('');
   const [categories, setCategories] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState('');
+  const [selectedCategoryName, setSelectedCategoryName] = useState('');
 
   useEffect(() => {
     // Fetch categories on component mount
@@ -29,13 +29,17 @@ const Add = () => {
     fetchCategories();
   }, []);
 
+  const handleCategoryChange = (e) => {
+    setSelectedCategoryName(e.target.value);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const quizData = {
       questionText,
       answerText,
-      category: selectedCategory,
+      category: selectedCategoryName, // Save category name instead of ID
       example
     };
 
@@ -45,7 +49,7 @@ const Add = () => {
         toast.success(response.data.message);
         setQuestionText('');
         setAnswerText('');
-        setSelectedCategory('');
+        setSelectedCategoryName('');
         setExample('');
       } else {
         toast.error(response.data.message);
@@ -88,10 +92,10 @@ const Add = () => {
         </div>
         <div>
           <label>Category:</label>
-          <select value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)} required>
+          <select value={selectedCategoryName} onChange={handleCategoryChange} required>
             <option value="">Select a category</option>
             {categories.map((cat) => (
-              <option key={cat._id} value={cat._id}>
+              <option key={cat._id} value={cat.category}>
                 {cat.category}
               </option>
             ))}

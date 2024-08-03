@@ -18,7 +18,7 @@ const Home = () => {
       }, []);
     return ( 
     <>
-    <div className="sm:mx-10 text-center">
+    <div className="sm:mx-10 mt-10 text-center ">
     <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none mx-auto table">
                   Test Your Knowledge
                 </h1>
