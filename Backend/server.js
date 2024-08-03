@@ -36,6 +36,23 @@ app.get("/",(req,res)=>{
     res.send("API Working")
 
 })
+app.get('/api/quiz/list', async (req, res) => {
+    const category = req.query.category;
+    let filter = {};
+    if (category) {
+        filter = { category: category };
+    }
+    try {
+        const quizzes = await Quiz.find(filter);
+        res.json({
+            success: true,
+            data: quizzes
+        });
+    } catch (err) {
+        res.status(500).json({ success: false, message: err.message });
+    }
+});
+
 
 
 

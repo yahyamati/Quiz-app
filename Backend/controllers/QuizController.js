@@ -41,6 +41,23 @@ const listQuizzes = async (req, res) => {
     res.json({ success: false, message: 'Error retrieving quizzes' });
   }
 };
+//List all quizzes by category
+export const listFiltredQuizzes = async (req, res) => {
+  const category = req.query.category;
+  let filter = {};
+  if (category) {
+      filter = { category: category };
+  }
+  try {
+      const quizzes = await Quiz.find(filter);
+      res.json({
+          success: true,
+          data: quizzes
+      });
+  } catch (err) {
+      res.status(500).json({ success: false, message: err.message });
+  }
+};
 
 // Remove a quiz
 const removeQuiz = async (req, res) => {
