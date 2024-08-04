@@ -15,6 +15,7 @@ const quizSchema = new mongoose.Schema({
   question: questionSchema,
   category: {type: String,required: true },
   example:{type: String},
+  explainExample:{type: String},
 });
   
 

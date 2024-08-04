@@ -5,7 +5,7 @@ import Category from '../models/categoryModel.js';
 
 // Add a quiz
 const addQuiz = async (req, res) => {
-  const { questionText, answerText, category , example } = req.body;
+  const { questionText, answerText, category , example,explainExample } = req.body;
 
   if (!category) {
     return res.json({ success: false, message: 'Category is required' });
@@ -20,7 +20,8 @@ const addQuiz = async (req, res) => {
         }
       },
       category,
-      example
+      example,
+      explainExample
     });
 
     await quiz.save();

@@ -7,6 +7,7 @@ const Add = () => {
   const [questionText, setQuestionText] = useState('');
   const [answerText, setAnswerText] = useState('');
   const [example, setExample] = useState('');
+  const [explainExample, setExplainExample] = useState(''); // Added state
   const [categories, setCategories] = useState([]);
   const [selectedCategoryName, setSelectedCategoryName] = useState('');
 
@@ -40,7 +41,8 @@ const Add = () => {
       questionText,
       answerText,
       category: selectedCategoryName, // Save category name instead of ID
-      example
+      example,
+      explainExample // Added explainExample
     };
 
     try {
@@ -51,6 +53,7 @@ const Add = () => {
         setAnswerText('');
         setSelectedCategoryName('');
         setExample('');
+        setExplainExample(''); // Reset explainExample
       } else {
         toast.error(response.data.message);
       }
@@ -87,6 +90,14 @@ const Add = () => {
           <textarea
             value={example}
             onChange={(e) => setExample(e.target.value)}
+            rows="4"
+          />
+        </div>
+        <div>
+          <label>Explain Example (optional):</label>
+          <textarea
+            value={explainExample}
+            onChange={(e) => setExplainExample(e.target.value)} // Updated to use correct state handler
             rows="4"
           />
         </div>
