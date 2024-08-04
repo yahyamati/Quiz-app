@@ -1,0 +1,75 @@
+/* Container for the entire list */
+.category-list {
+    padding: 20px;
+    width: 90%;
+    max-height: 750px; /* Adjust the height based on your design */
+    overflow-y: auto; /* Add vertical scroll */
+    overflow-x: hidden; /* Prevent horizontal scroll */
+    margin: 0 auto; /* Center align the list */
+    background-color: #f2f2f2; /* Optional: Light background color */
+}
+
+/* Remove default padding and bullet points from the list */
+.category-list ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Styling for individual category items */
+.category-item {
+    background-color: #f9f9f9;          /* Light grey background */
+    border: 1px solid #ddd;             /* Light grey border */
+    border-radius: 5px;                 /* Rounded corners */
+    padding: 20px;                      /* Increased padding for more space inside the item */
+    margin-bottom: 15px;                /* Increased margin for more space below each item */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    display: flex;
+    width: 70vw;  /* Full viewport width */
+    align-items: center;                /* Center items vertically */
+    position: relative;  
+    overflow-x: hidden;  /* Prevent horizontal scroll */
+}
+
+/* Styling for category item images */
+.category-item img {
+    width: 120px;                       /* Slightly larger width */
+    height: 120px;                      /* Slightly larger height */
+    border-radius: 5px;                 /* Rounded corners */
+    margin-right: 25px;                 /* Increased space to the right of the image */
+}
+
+/* Styling for category item text */
+.category-item p {
+    margin: 10px 0;  
+    margin-left: 30px;                   /* Increased space between paragraphs */
+}
+
+/* Styling for category item name */
+.category-item p:first-child {
+    font-weight: bold;                  /* Make the first paragraph (name) bold */
+    font-size: 1.1em;                   /* Slightly larger font size */
+}
+
+/* Remove button styling */
+.remove-btn2 {
+    position: absolute;
+    top: 10px;
+    right: 50px;            
+    color: black;                     /* White icon color */
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    background: transparent;
+  
+}
+
+
+/* No categories found text */
+.no-found {
+    text-align: center;
+    font-size: 2em;
+    font-weight: bold;
+    margin-top: 16vw;
+    width: 75vw;
+}

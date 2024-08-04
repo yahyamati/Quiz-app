@@ -73,6 +73,19 @@ const removeQuiz = async (req, res) => {
 };
 
 
+const removeCategory = async (req, res) => {
+  const { id } = req.body;
+
+  try {
+    await Category.findByIdAndDelete(id);
+    res.json({ success: true, message: 'Category removed' });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: 'Error removing category' });
+  }
+};
+
+
 const addCategory = async (req, res) => {
   if (!req.file) {
     return res.status(400).json({ success: false, message: 'No image file uploaded' });
@@ -108,4 +121,4 @@ const listCategories = async (req, res) => {
 
 
 
-export { addQuiz, listQuizzes, removeQuiz, addCategory ,listCategories };
+export { addQuiz, listQuizzes, removeQuiz, addCategory ,listCategories , removeCategory};

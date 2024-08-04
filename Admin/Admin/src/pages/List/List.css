@@ -1,7 +1,7 @@
 /* Container for the quiz list */
 .quiz-list {
     margin: 20px auto;
-    max-height: 600px; /* Adjust height as needed */
+    max-height: 700px; /* Adjust height as needed */
     overflow-y: auto; /* Enable vertical scrolling */
     border: 1px solid #ddd; /* Optional: add a border for better visibility */
     border-radius: 4px; /* Optional: rounded corners */
@@ -49,7 +49,7 @@ ul {
     background: none;
     border: none;
     cursor: pointer;
-    color: #ff0000;
+    color: black;
     font-size: 16px;
     padding: 5px;
 }

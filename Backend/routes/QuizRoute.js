@@ -1,6 +1,6 @@
 
 import express from 'express';
-import { addQuiz, listQuizzes, removeQuiz,addCategory, listCategories,listFiltredQuizzes } from '../controllers/QuizController.js';
+import { addQuiz, listQuizzes, removeQuiz,addCategory, listCategories,listFiltredQuizzes, removeCategory } from '../controllers/QuizController.js';
 import multer from "multer"
 
 const router = express.Router();
@@ -25,5 +25,6 @@ router.post('/add', addQuiz);
 router.get('/list', listQuizzes);
 router.get('/listFil', listFiltredQuizzes);
 router.post('/remove', removeQuiz);
+router.post('/removeCategory', removeCategory);
 
 export default router;
