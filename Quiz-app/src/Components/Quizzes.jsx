@@ -11,11 +11,24 @@ import CodeSnippet from "./CodeSnippet";
 const Quizzes = () => {
     const { category } = useParams();
     const [quizzes, setQuizzes] = useState([]);
-    const [currentIndex, setCurrentIndex] = useState(0);
+    const [currentIndex, setCurrentIndex] = useState(() => {
+        const savedIndex = localStorage.getItem('currentIndex');
+        return savedIndex !== null ? JSON.parse(savedIndex) : 0;
+    });
     const [revealed, setRevealed] = useState(false);
-    const [skippedCount, setSkippedCount] = useState(0);
-    const [passedCount, setPassedCount] = useState(0);
+    const [skippedCount, setSkippedCount] = useState(() => {
+        const savedSkippedCount = localStorage.getItem('skippedCount');
+        return savedSkippedCount !== null ? JSON.parse(savedSkippedCount) : 0;
+    });
+    const [passedCount, setPassedCount] = useState(() => {
+        const savedPassedCount = localStorage.getItem('passedCount');
+        return savedPassedCount !== null ? JSON.parse(savedPassedCount) : 0;
+    });
     const [slide, setSlide] = useState('right');
+    const [actions, setActions] = useState(() => {
+        const savedActions = localStorage.getItem('actions');
+        return savedActions !== null ? JSON.parse(savedActions) : [];
+    });
 
     useEffect(() => {
         const fetchQuizzes = async () => {
@@ -30,9 +43,25 @@ const Quizzes = () => {
         fetchQuizzes();
     }, [category]);
 
+    useEffect(() => {
+        localStorage.setItem('currentIndex', JSON.stringify(currentIndex));
+    }, [currentIndex]);
+
+    useEffect(() => {
+        localStorage.setItem('skippedCount', JSON.stringify(skippedCount));
+    }, [skippedCount]);
+
+    useEffect(() => {
+        localStorage.setItem('passedCount', JSON.stringify(passedCount));
+    }, [passedCount]);
+
+    useEffect(() => {
+        localStorage.setItem('actions', JSON.stringify(actions));
+    }, [actions]);
 
     const handleNext = () => {
         setSkippedCount(skippedCount + 1);
+        setActions([...actions, 'skipped']);
         setCurrentIndex(currentIndex + 1);
         setRevealed(false);
         setSlide('left');
@@ -40,6 +69,7 @@ const Quizzes = () => {
 
     const handlePass = () => {
         setPassedCount(passedCount + 1);
+        setActions([...actions, 'passed']);
         setCurrentIndex(currentIndex + 1);
         setRevealed(false);
         setSlide('left');
@@ -51,17 +81,31 @@ const Quizzes = () => {
 
     const handlePrevious = () => {
         if (currentIndex > 0) {
+            const lastAction = actions[currentIndex - 1];
+            if (lastAction === 'skipped') {
+                setSkippedCount(skippedCount - 1);
+            } else if (lastAction === 'passed') {
+                setPassedCount(passedCount - 1);
+            }
+
+            setActions(actions.slice(0, -1));
             setCurrentIndex(currentIndex - 1);
             setRevealed(false);
             setSlide('right');
         }
     };
+
     const handleReset = () => {
         setCurrentIndex(0);
         setRevealed(false);
         setSkippedCount(0);
         setPassedCount(0);
         setSlide('right');
+        setActions([]);
+        localStorage.removeItem('currentIndex');
+        localStorage.removeItem('skippedCount');
+        localStorage.removeItem('passedCount');
+        localStorage.removeItem('actions');
     };
 
     const totalQuestions = quizzes.length;
@@ -77,6 +121,25 @@ const Quizzes = () => {
     }
 
     const currentQuiz = quizzes[currentIndex];
+
+    const frameworkToLanguageMap = {
+        flask: 'python',
+        django: 'python',
+        laravel: 'php',
+        angular: 'typescript',
+        spring: 'java',
+        flutter: 'dart',
+        'react.js': 'jsx',
+        rails: 'ruby',
+        'C#': 'csharp',
+        'asp.net': 'csharp',
+        'vue.js': 'javascript',
+        'express.js': 'javascript',
+        'node.js': 'javascript',
+        'next.js': 'javascript',        
+        // Add more frameworks and their languages as needed
+      };
+      const language = frameworkToLanguageMap[category.toString().toLowerCase()] || category.toString().toLowerCase();
 
     return (
       <div>
@@ -131,8 +194,9 @@ const Quizzes = () => {
               </div>
               {currentQuiz.example && (
                 <>
+                
                 <CodeSnippet
-                  language={category.toString().toLowerCase()}
+                  language={language}
                   codeString={currentQuiz.example}
                 />
                 {
