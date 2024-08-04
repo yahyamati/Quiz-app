@@ -105,4 +105,7 @@ const listCategories = async (req, res) => {
   }
 };
 
+
+
+
 export { addQuiz, listQuizzes, removeQuiz, addCategory ,listCategories };
