@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
-import Home from './Components/Home';
-import Quizzes from './Components/Quizzes';
 import Navbar from './Components/Navbar';
 import Footer from './Components/Footer';
+import Loading from './Loading';
+
+const Home = lazy(() => import('./Components/Home'));
+const Quizzes = lazy(() => import('./Components/Quizzes'));
 
 function App() {
   return (
@@ -12,11 +14,13 @@ function App() {
       <Router>
         <Navbar />
         <main className="flex-grow">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/category/:category" element={<Quizzes />} />
-            <Route path="*" element={<div>Not found</div>} />
-          </Routes>
+          <Suspense fallback={<Loading/>}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/category/:category" element={<Quizzes />} />
+              <Route path="*" element={<div>Not found</div>} />
+            </Routes>
+          </Suspense>
         </main>
         <Footer />
       </Router>

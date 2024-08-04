@@ -25,10 +25,10 @@ const Footer = () => {
 
         <div className="flex flex-col items-center md:items-center space-y-4 md:w-1/3">
           <h2 className="font-bold text-xl mb-4 text-center md:text-center">GET IN TOUCH</h2>
-          <ul className="space-y-2 text-center md:text-center">
-            <li>islam.birouk.2002@gmail.com</li>
-            <li>Yahyamati8@gmail.com</li>
-          </ul>
+          <div className="flex flex-col text-center md:text-center">
+            <a href="mailto:islam.birouk.2004@gmail.com">islam.birouk.2004@gmail.com</a>
+            <a href="mailto:Yahyamati8@gmail.com" >Yahyamati8@gmail.com</a>
+          </div>
         </div>
       </div>
       <hr className="my-4 border-gray-600" />
