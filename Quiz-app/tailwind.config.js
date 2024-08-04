@@ -5,6 +5,21 @@ module.exports = {
   ],
   theme: {
     extend: {
+      keyframes: {
+        pulse: {
+          '0%': { transform: 'scale(0.6)', opacity: '1' },
+          '50%': { transform: 'scale(1.2)', opacity: '0' },
+          '100%': { transform: 'scale(0.6)', opacity: '1' },
+        },
+        spin: {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(360deg)' },
+        },
+      },
+      animation: {
+        pulse: 'pulse 1s ease-in-out infinite',
+        spin: 'spin 2s linear infinite',
+      },
       screens: {
         '2xs': '400px', // Extra extra small devices
         'xs': '475px',  // Extra small devices
