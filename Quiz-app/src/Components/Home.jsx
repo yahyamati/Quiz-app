@@ -52,7 +52,7 @@ export const Block = ({category,imgsrc,navigate }) => {
         navigate(`/category/${category}`);
     }}
     className="flex flex-col gap-2 items-center justify-center bg-slate-100 px-16 p-4 rounded-3xl hover:scale-110 cursor-pointer hover:bg-slate-200 transition-transform ease-in-out w-80">
-        <img src={`http://localhost:4000/images/${imgsrc}`} alt="category logo" className='w-16' />
+        <img src={`http://localhost:4000/images/${imgsrc}`} alt="category logo" className='w-16 h-16' />
         <p className=" uppercase font-semibold">{category}</p>
     </div>
     </> );
