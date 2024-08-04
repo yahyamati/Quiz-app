@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router";
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import { FaCopy } from 'react-icons/fa';
 import { IoArrowBackOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 
@@ -133,14 +130,24 @@ const Quizzes = () => {
                 </p>
               </div>
               {currentQuiz.example && (
+                <>
                 <CodeSnippet
                   language={category.toString().toLowerCase()}
                   codeString={currentQuiz.example}
                 />
+                {
+                    currentQuiz.explainExample && (
+                        <div className="bg-slate-100 p-4 rounded-xl mt-6">
+                        <p className="text-gray-700">{currentQuiz.explainExample}</p>
+                        </div>)
+                }
+                </>
+                
+
               )}
             </div>
           )}
-          <div className="flex justify-between mt-10">
+          <div className="flex justify-center xs:justify-between mt-10 flex-wrap gap-4 sm:gap-0">
             <button
               onClick={handlePass}
               className="font-semibold underline-offset-2 underline text-green-500 hover:text-green-600 transition ease-in-out"

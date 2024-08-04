@@ -7,6 +7,8 @@ const QuizOver = ({
     passedCount,
     skippedCount
 }) => {
+  const { width, height } = useWindowSize();
+  
     return (
         <div className="flex flex-col items-center justify-center h-80 mx-10">
             <Link
@@ -20,7 +22,7 @@ const QuizOver = ({
                 {
                     passedCount > totalQuestions / 2 ? (
                     <>
-                    <Confetti className="" />
+                    <Confetti width={width} height={height} />
                      <h1 className="text-4xl font-bold text-green-600 mb-4">Congratulations!</h1>      
                     </>
                     
@@ -37,3 +39,29 @@ const QuizOver = ({
 }
  
 export default QuizOver;
+
+
+// useWindowSize.js
+import { useState, useEffect } from 'react';
+
+const useWindowSize = () => {
+  const [windowSize, setWindowSize] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  return windowSize;
+};
+
