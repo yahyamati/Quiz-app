@@ -7,7 +7,7 @@ const Add = () => {
   const [questionText, setQuestionText] = useState('');
   const [answerText, setAnswerText] = useState('');
   const [example, setExample] = useState('');
-  const [explainExample, setExplainExample] = useState(''); // Added state
+  const [explainExample, setExplainExample] = useState(''); 
   const [categories, setCategories] = useState([]);
   const [selectedCategoryName, setSelectedCategoryName] = useState('');
 
@@ -17,7 +17,7 @@ const Add = () => {
       try {
         const response = await axios.get('http://localhost:4000/api/quiz/listCategory');
         if (response.data.success) {
-          setCategories(response.data.data); // Adjust based on response structure
+          setCategories(response.data.data); 
         } else {
           toast.error(response.data.message);
         }
@@ -42,7 +42,7 @@ const Add = () => {
       answerText,
       category: selectedCategoryName, // Save category name instead of ID
       example,
-      explainExample // Added explainExample
+      explainExample 
     };
 
     try {
@@ -53,7 +53,7 @@ const Add = () => {
         setAnswerText('');
         setSelectedCategoryName('');
         setExample('');
-        setExplainExample(''); // Reset explainExample
+        setExplainExample(''); 
       } else {
         toast.error(response.data.message);
       }
@@ -97,7 +97,7 @@ const Add = () => {
           <label>Explain Example (optional):</label>
           <textarea
             value={explainExample}
-            onChange={(e) => setExplainExample(e.target.value)} // Updated to use correct state handler
+            onChange={(e) => setExplainExample(e.target.value)} 
             rows="4"
           />
         </div>

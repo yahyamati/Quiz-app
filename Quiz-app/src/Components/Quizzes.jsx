@@ -12,21 +12,21 @@ const Quizzes = () => {
     const { category } = useParams();
     const [quizzes, setQuizzes] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(() => {
-        const savedIndex = localStorage.getItem('currentIndex');
+        const savedIndex = localStorage.getItem(`${category}_currentIndex`);
         return savedIndex !== null ? JSON.parse(savedIndex) : 0;
     });
     const [revealed, setRevealed] = useState(false);
     const [skippedCount, setSkippedCount] = useState(() => {
-        const savedSkippedCount = localStorage.getItem('skippedCount');
+        const savedSkippedCount = localStorage.getItem(`${category}_skippedCount`);
         return savedSkippedCount !== null ? JSON.parse(savedSkippedCount) : 0;
     });
     const [passedCount, setPassedCount] = useState(() => {
-        const savedPassedCount = localStorage.getItem('passedCount');
+        const savedPassedCount = localStorage.getItem(`${category}_passedCount`);
         return savedPassedCount !== null ? JSON.parse(savedPassedCount) : 0;
     });
     const [slide, setSlide] = useState('right');
     const [actions, setActions] = useState(() => {
-        const savedActions = localStorage.getItem('actions');
+        const savedActions = localStorage.getItem(`${category}_actions`);
         return savedActions !== null ? JSON.parse(savedActions) : [];
     });
 
@@ -44,20 +44,20 @@ const Quizzes = () => {
     }, [category]);
 
     useEffect(() => {
-        localStorage.setItem('currentIndex', JSON.stringify(currentIndex));
-    }, [currentIndex]);
+        localStorage.setItem(`${category}_currentIndex`, JSON.stringify(currentIndex));
+    }, [currentIndex, category]);
 
     useEffect(() => {
-        localStorage.setItem('skippedCount', JSON.stringify(skippedCount));
-    }, [skippedCount]);
+        localStorage.setItem(`${category}_skippedCount`, JSON.stringify(skippedCount));
+    }, [skippedCount, category]);
 
     useEffect(() => {
-        localStorage.setItem('passedCount', JSON.stringify(passedCount));
-    }, [passedCount]);
+        localStorage.setItem(`${category}_passedCount`, JSON.stringify(passedCount));
+    }, [passedCount, category]);
 
     useEffect(() => {
-        localStorage.setItem('actions', JSON.stringify(actions));
-    }, [actions]);
+        localStorage.setItem(`${category}_actions`, JSON.stringify(actions));
+    }, [actions, category]);
 
     const handleNext = () => {
         setSkippedCount(skippedCount + 1);
@@ -102,10 +102,10 @@ const Quizzes = () => {
         setPassedCount(0);
         setSlide('right');
         setActions([]);
-        localStorage.removeItem('currentIndex');
-        localStorage.removeItem('skippedCount');
-        localStorage.removeItem('passedCount');
-        localStorage.removeItem('actions');
+        localStorage.removeItem(`${category}_currentIndex`);
+        localStorage.removeItem(`${category}_skippedCount`);
+        localStorage.removeItem(`${category}_passedCount`);
+        localStorage.removeItem(`${category}_actions`);
     };
 
     const totalQuestions = quizzes.length;
@@ -116,6 +116,7 @@ const Quizzes = () => {
                 totalQuestions={totalQuestions}
                 skippedCount={skippedCount}
                 passedCount={passedCount}
+                category={category}
             />
         );
     }
@@ -243,6 +244,3 @@ const Quizzes = () => {
 };
 
 export default Quizzes;
-
-
-
