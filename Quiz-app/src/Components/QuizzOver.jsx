@@ -1,12 +1,8 @@
 import { IoArrowBackOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
-
 import Confetti from 'react-confetti';
 const QuizOver = ({
-    totalQuestions,
-    passedCount,
-    skippedCount,
-    category
+  totalQuestions, skippedCount, passedCount, category
 }) => {
   const { width, height } = useWindowSize();
 
@@ -41,9 +37,9 @@ const QuizOver = ({
                     <h1 className="text-4xl font-bold text-green-600 mb-4">It's Okay Try next Time</h1>
                                      )
                 }
-            
-              <p className="font-semibold">Skipped: {skippedCount}</p>
-              <p className="font-semibold">Passed: {passedCount}</p>
+              <p className="font-semibold">You have Passed: {passedCount}</p>
+              <p className="font-semibold">And Skipped: {skippedCount}</p>
+              
             </div>
           </div>
     );

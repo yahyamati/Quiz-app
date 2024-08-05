@@ -3,12 +3,12 @@ import axios from "axios";
 import { useParams } from "react-router";
 import { IoArrowBackOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
-
 import QuizOver from "./QuizzOver";
 import ProgressBar from "./ProgressBar";
 import CodeSnippet from "./CodeSnippet";
 
 const Quizzes = () => {
+     
     const { category } = useParams();
     const [quizzes, setQuizzes] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(() => {
@@ -107,7 +107,7 @@ const Quizzes = () => {
         localStorage.removeItem(`${category}_passedCount`);
         localStorage.removeItem(`${category}_actions`);
     };
-
+    
     const totalQuestions = quizzes.length;
     const progressPercentage = ((currentIndex ) / totalQuestions) * 100;
     if (currentIndex >= totalQuestions) {

@@ -1,19 +1,18 @@
-// Loading.js
 import React from 'react';
-import { assets } from './assets/assets';
-
 const Loading = () => (
-    <div className="flex flex-col justify-center items-center h-screen">
-    <div className="relative w-16 h-16">
-    <div className="absolute top-0 left-0 w-16 h-16 rounded-full border-4 border-gray-800 animate-pulse flex items-center justify-center">
-      <img src={assets.logo} alt="logo" className='bg-gray-300 rounded-full' />
-    </div>
-    <div className="absolute top-0 left-0 w-16 h-16 rounded-full border-4 border-transparent border-t-gray-800 animate-spin"></div>
-    </div>
-    <div className="mt-5 text-2xl text-gray-800 font-sans uppercase text-center">
-      Loading...
-    </div>
+  <div className='flex items-center justify-center'>
+  
+  <div className="animate-pulse flex flex-col items-center gap-4 w-60">
+  <div>
+    <div className="w-40 sm:w-96 h-6 bg-slate-300 rounded-md hidden sm:block"></div>
+    <div className="w-28 sm:w-80 h-4 bg-slate-300 mx-auto mt-3 rounded-md"></div>
   </div>
+  <div className="h-5 sm:h-7 bg-slate-300 w-full rounded-md"></div>
+  <div className="h-5 sm:h-7 bg-slate-300 w-full rounded-md"></div>
+  <div className="h-5 sm:h-7 bg-slate-300 w-full rounded-md"></div>
+  <div className="h-5 sm:h-7 bg-slate-300 w-1/2 rounded-md"></div>
+</div>
+</div>
   
 );
 
