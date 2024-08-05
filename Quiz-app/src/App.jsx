@@ -1,6 +1,7 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
+import 'react-tooltip/dist/react-tooltip.css';
 import Navbar from './Components/Navbar';
 import Footer from './Components/Footer';
 import Loading from './Loading';
