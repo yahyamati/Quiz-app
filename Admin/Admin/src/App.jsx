@@ -9,6 +9,9 @@ import { ToastContainer } from 'react-toastify';
   import 'react-toastify/dist/ReactToastify.css';
 import ListCategory from './pages/ListCategory/ListCategory'
 import Article from './pages/Article/Article'
+import ListArticle from './pages/ListArticle/ListArticle'
+import CategoryArticle from './pages/AddCategoryArticle/CategoryArticle'
+import ListCategoryArticle from './pages/ListCategoryArticle/ListCategoryArticle'
 
 
 function App() {
@@ -25,6 +28,9 @@ function App() {
              <Route path="/Category" element={<Category url={url} />} />
              <Route path="/ListCategory" element={<ListCategory url={url} />} />
              <Route path="/addArticle" element={<Article url={url} />} />
+             <Route path="/ListArticle" element={<ListArticle url={url} />} />
+             <Route path="/CategoryArticle" element={<CategoryArticle url={url} />} />
+             <Route path="/listCategoryArticle" element={<ListCategoryArticle url={url} />} />
           </Routes>
         </div>
       </div>

@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './Category.css';
-import uploadArea from '../../assets/upload_area.png'; // Replace with your actual image path
+import uploadArea from '../../assets/upload_area.png'; 
 
 const Category = () => {
   const [categoryName, setCategoryName] = useState('');

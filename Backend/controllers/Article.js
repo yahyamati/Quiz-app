@@ -1,18 +1,25 @@
 import Article from '../models/ArticleModel.js';
+import CategoryArticle from '../models/CategoryArticleModel.js';
 
 // Add a new article
 export const addArticle = async (req, res) => {
-    const { text1, text2, liText, text3 , category } = req.body;
-    const image_filename = req.file.filename;
+    const { question, text1, text2, liText, text3, category1,category2 } = req.body;
+    const image_filename = req.file ? req.file.filename : null;
+
+    if (!category1 || !category2) {
+        return res.status(400).json({ success: false, message: 'Both categories are required' });
+    }
 
     try {
         const newArticle = new Article({
+            Question: question, // Ensure field names match
             text1,
-            image:image_filename,
+            image: image_filename,
             text2,
             liText: JSON.parse(liText),
             text3,
-            category
+            category1,
+            category2
         });
 
         const savedArticle = await newArticle.save();
@@ -30,7 +37,6 @@ export const addArticle = async (req, res) => {
         });
     }
 };
-
 
 
 // Get all articles
@@ -104,24 +110,65 @@ export const updateArticle = async (req, res) => {
 
 // Delete an article
 export const deleteArticle = async (req, res) => {
+    const { id } = req.body;
+
     try {
-        const deletedArticle = await Article.findByIdAndDelete(req.params.id);
+        await Article.findByIdAndDelete(id);
+        res.json({ success: true, message: 'Article removed' });
+    } catch (error) {
+        console.log(error);
+        res.json({ success: false, message: 'Error removing article' });
+    }
+};
 
-        if (!deletedArticle) {
-            return res.status(404).json({
-                success: false,
-                message: 'Article not found'
-            });
-        }
+// Remove a CategoryArticle
+export const removeCategoryArticle = async (req, res) => {
+    const { id } = req.body;
 
-        res.status(200).json({
-            success: true,
-            message: 'Article deleted successfully'
-        });
-    } catch (err) {
-        res.status(500).json({
-            success: false,
-            message: err.message
-        });
+    try {
+        await CategoryArticle.findByIdAndDelete(id);
+        res.json({ success: true, message: 'CategoryArticle removed' });
+    } catch (error) {
+        console.log(error);
+        res.json({ success: false, message: 'Error removing CategoryArticle' });
+    }
+};
+
+// Add a new CategoryArticle
+export const addCategoryArticle = async (req, res) => {
+    const { CategoryArticle: categoryArticleName } = req.body;
+
+    if (!req.file) {
+        return res.status(400).json({ success: false, message: 'No image file uploaded' });
+    }
+
+    if (!categoryArticleName) {
+        return res.status(400).json({ success: false, message: 'CategoryArticle is required' });
+    }
+
+    const image_filename = req.file.filename;
+
+    const newCategoryArticle = new CategoryArticle({
+        CategoryArticle: categoryArticleName,
+        image: image_filename
+    });
+
+    try {
+        await newCategoryArticle.save();
+        res.json({ success: true, message: 'CategoryArticle added successfully' });
+    } catch (error) {
+        console.error('Error adding CategoryArticle:', error);
+        res.status(500).json({ success: false, message: 'Error adding CategoryArticle' });
+    }
+};
+
+// List all categories
+export const listCategoriesArticle = async (req, res) => {
+    try {
+        const categories = await CategoryArticle.find({});
+        res.json({ success: true, data: categories });
+    } catch (error) {
+        console.log(error);
+        res.json({ success: false, message: 'Error retrieving categories' });
     }
 };
