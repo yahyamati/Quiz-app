@@ -8,6 +8,7 @@ import Category from './pages/Category/Category'
 import { ToastContainer } from 'react-toastify';
   import 'react-toastify/dist/ReactToastify.css';
 import ListCategory from './pages/ListCategory/ListCategory'
+import Article from './pages/Article/Article'
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
              <Route path="/List" element={<List url={url} />} />
              <Route path="/Category" element={<Category url={url} />} />
              <Route path="/ListCategory" element={<ListCategory url={url} />} />
+             <Route path="/addArticle" element={<Article url={url} />} />
           </Routes>
         </div>
       </div>

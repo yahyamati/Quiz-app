@@ -40,7 +40,7 @@ const Add = () => {
     const quizData = {
       questionText,
       answerText,
-      category: selectedCategoryName, // Save category name instead of ID
+      category: selectedCategoryName, 
       example,
       explainExample 
     };

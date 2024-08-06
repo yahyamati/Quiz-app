@@ -1,4 +1,3 @@
-// Backend/controllers/QuizController.js
 
 import Quiz from '../models/QuizModel.js';
 import Category from '../models/categoryModel.js';

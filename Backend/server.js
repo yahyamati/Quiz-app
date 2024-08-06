@@ -3,6 +3,7 @@ import cors from "cors"
 import { connectDB } from "./config/db.js"
 import userRouter from "./routes/UserRoute.js"
 import quizRoutes from './routes/QuizRoute.js';
+import articleRoutes from './routes/ArticleRoute.js';
 import Quiz from "./models/QuizModel.js";
 
 
@@ -32,6 +33,7 @@ app.use(cors()) //we can access backend for any frontend
 //api endpoint
 app.use('/api/user',userRouter);
 app.use('/api/quiz', quizRoutes);
+app.use('/api/articles', articleRoutes);
 app.use("/images",express.static('uploads'));
 
 
