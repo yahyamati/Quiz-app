@@ -1,7 +1,5 @@
 import express from "express"
 import cors from "cors"
-import bodyParser from 'body-parser';
-import dotenv from 'dotenv';
 import { connectDB } from "./config/db.js"
 import userRouter from "./routes/UserRoute.js"
 import quizRoutes from './routes/QuizRoute.js';
@@ -11,6 +9,16 @@ import quizRoutes from './routes/QuizRoute.js';
 //app config
 const app = express()
 const port = 4000 //my port
+
+
+app.use(cors(
+    {
+        origin:[],
+        methods: ["GET", "POST"],
+        credentials:true
+
+    }
+));
 
 
 

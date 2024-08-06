@@ -33,7 +33,7 @@ useEffect(() => {
 
 const progressPercentage = (currentIndex / totalQuestions) * 100;
 if (currentIndex === "") {
-    currentIndex="0";
+    currentIndex==="0";
 }
     return ( 
     <>
