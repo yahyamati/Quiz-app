@@ -3,6 +3,7 @@ import cors from "cors"
 import { connectDB } from "./config/db.js"
 import userRouter from "./routes/UserRoute.js"
 import quizRoutes from './routes/QuizRoute.js';
+import Quiz from "./models/QuizModel.js";
 
 
 
