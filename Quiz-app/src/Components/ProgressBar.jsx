@@ -1,21 +1,25 @@
-const ProgressBar = ({ progressPercentage,skippedCount,passedCount,totalQuestions,currentIndex }) => {
+const ProgressBar = ({ progressPercentage,skippedCount,passedCount,totalQuestions,currentIndex , home }) => {
     return (
-        <div className="relative pt-1">
+        <div className="relative pt-1 w-full">
             <div className="flex mb-2 items-center justify-between">
-              <div>
+               {!home && <>
+               <div>
                 <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blue-600 bg-blue-200">
                   Progress
                 </span>
               </div>
-
+             
               <p className="text-blue-600 bg-blue-20 sm:text-sm text-xs">
                 Skipped: {skippedCount}
               </p>
               <p className="text-blue-600 bg-blue-20 sm:text-sm text-xs">
                 Passed: {passedCount}
               </p>
+              </>
+              }
+              
 
-              <div className="text-right">
+              <div className={`text-right ${home ? "table mx-auto": ""}`}>
                 <span className="text-xs font-semibold inline-block text-blue-600 bg-blue-200 rounded-3xl px-2 p-1">
                   {currentIndex}/{totalQuestions}
                 </span>
