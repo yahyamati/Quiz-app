@@ -14,7 +14,7 @@ const port = 4000 //my port
 
 app.use(cors(
     {
-        origin:[],
+        origin:["https://quiz-app-gilt-sigma.vercel.app"],
         methods: ["GET", "POST"],
         credentials:true
 
