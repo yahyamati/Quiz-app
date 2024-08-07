@@ -1,6 +1,6 @@
 import express from 'express';
 import multer from 'multer';
-import { addArticle, getAllArticles, getArticleById, updateArticle, deleteArticle, addCategoryArticle, listCategoriesArticle, removeCategoryArticle } from '../controllers/Article.js';
+import { addArticle, getAllArticles, getArticleById, updateArticle, deleteArticle, addCategoryArticle, listCategoriesArticle, removeCategoryArticle, listFiltredArticle } from '../controllers/Article.js';
 
 const router = express.Router();
 
@@ -21,5 +21,6 @@ router.post('/remove', deleteArticle);
 router.post('/addCategoryArticle', upload.single('image'), addCategoryArticle);
 router.get('/listCategoryArticle', listCategoriesArticle);
 router.post('/removeCategoryArticle', removeCategoryArticle);
+router.get('/listFilArticle', listFiltredArticle);
 
 export default router;

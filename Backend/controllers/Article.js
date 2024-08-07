@@ -171,4 +171,31 @@ export const listCategoriesArticle = async (req, res) => {
         console.log(error);
         res.json({ success: false, message: 'Error retrieving categories' });
     }
+
 };
+
+
+  // List all articles by category
+  export const listFiltredArticle = async (req, res) => {
+    const category = req.query.category2; // Query parameter name
+    let filter = {};
+
+    // Apply filter if category is provided
+    if (category) {
+        filter = { category2: category };
+    }
+
+    try {
+        // Fetch articles based on filter
+        const articles = await Article.find(filter);
+
+        // Return response
+        res.json({
+            success: true,
+            data: articles
+        });
+    } catch (err) {
+        // Handle errors
+        res.status(500).json({ success: false, message: err.message });
+    }
+}
