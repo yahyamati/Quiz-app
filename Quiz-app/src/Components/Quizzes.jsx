@@ -8,7 +8,7 @@ import ProgressBar from "./ProgressBar";
 import CodeSnippet from "./CodeSnippet";
 import Loading from "../Loading";
 
-const Quizzes = () => {
+const Quizzes = ({url}) => {
     const { category } = useParams();
     const [quizzes, setQuizzes] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(() => {
@@ -36,7 +36,7 @@ const Quizzes = () => {
     useEffect(() => {
         const fetchQuizzes = async () => {
             try {
-                const response = await axios.get(`http://localhost:4000/api/quiz/listFil?category=${category}`);
+                const response = await axios.get(`${url}/api/quiz/listFil?category=${category}`);
                 setQuizzes(response.data.data);
                 setLoading(false); // Set loading to false after data is fetched
             } catch (error) {
