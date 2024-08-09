@@ -1,7 +1,7 @@
 import ProgressBar from './ProgressBar';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
- const Block = ({category,imgsrc,navigate }) => {
+ const Block = ({url,category,imgsrc,navigate }) => {
 
 const [totalQuestions, setTotalQuestions] = useState('');
 const [currentIndex, setCurrentIndex] = useState(0);

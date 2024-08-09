@@ -8,9 +8,11 @@ import Loading from './Loading';
 
 const Home = lazy(() => import('./Components/Home'));
 const Quizzes = lazy(() => import('./Components/Quizzes'));
-const QuizOver = lazy(() => import('./Components/QuizzOver'));
+const Articles = lazy(() => import('./Components/Articles'));
+const Article = lazy(() => import('./Components/Article'));
 
 function App() {
+  const url = "http://localhost:4000"; // Adjust this to your backend URL
   return (
     <div className="flex flex-col min-h-screen">
       <Router>
@@ -18,9 +20,10 @@ function App() {
         <main className="flex-grow">
           <Suspense fallback={<Loading/>}>
             <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/category/:category" element={<Quizzes />} />
-              {/* <Route path="/category/:category/quizzover" element={<QuizOver />} /> */}
+              <Route path="/" element={<Home url={url}/>} />
+              <Route path="/category/:category" element={<Quizzes url={url} />} />
+              <Route path="/articles" element={<Articles url={url}/>} />
+              <Route path="/articles/:category" element={<Article url={url}/>} />              
               <Route path="*" element={<div>Not found</div>} />
             </Routes>
           </Suspense>
