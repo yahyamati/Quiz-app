@@ -1,22 +1,36 @@
+import { useState } from 'react';
+import { IoChevronUp, IoChevronDown } from 'react-icons/io5';
+
 const BlockArticle = ({ category, articles, navigate }) => {
-    return (
-      <div
-        onClick={() => {
-          console.log(category);
-          navigate(`/articles/${category}`);
-        }}
-        className="flex flex-col gap-2 items-center justify-center bg-slate-100 px-16 py-4 rounded-3xl hover:scale-110 cursor-pointer hover:bg-slate-200 transition-transform ease-in-out w-1/4"
-      >
-        <p className="uppercase font-bold">{category}</p>
-        <p className="font-semibold">Questions in the Article : </p>
-        {articles.map((article) => (
-          <div key={article._id} className="mt-2 text-gray-600">
-            <p className="text-left">{article.Question}</p>
-          </div>
-        ))}
+  const [isDescriptionVisible, setIsDescriptionVisible] = useState(false);
+
+  const toggleDescription = (e) => {
+    e.stopPropagation();
+    setIsDescriptionVisible(!isDescriptionVisible);
+  };
+
+  return (
+    <div
+      className="grid grid-cols-1 gap-4 p-4 border rounded-lg shadow-md cursor-pointer transition-transform ease-in-out w-full md:w-1/4 mx-auto"
+      onClick={() => navigate(`/articles/${category}`)}
+    >
+      <div className="flex justify-between items-center ">
+        <p className="uppercase font-bold text-center">{category}</p>
+        <div onClick={toggleDescription} className="cursor-pointer">
+          {isDescriptionVisible ? <IoChevronUp size={20} /> : <IoChevronDown size={20} />}
+        </div>
       </div>
-    );
-  }
-  
-  export default BlockArticle;
-  
+      {isDescriptionVisible && (
+        <div className="grid gap-2 text-slate-600 text-sm">
+          {articles.map((article) => (
+            <div key={article._id} className="rounded-md p-2 bg-white shadow-sm">
+              <p>{article.Description}</p>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default BlockArticle;

@@ -136,7 +136,7 @@ export const removeCategoryArticle = async (req, res) => {
 
 // Add a new CategoryArticle
 export const addCategoryArticle = async (req, res) => {
-    const { CategoryArticle: categoryArticleName } = req.body;
+    const { CategoryArticle: categoryArticleName, Description } = req.body;
 
     if (!req.file) {
         return res.status(400).json({ success: false, message: 'No image file uploaded' });
@@ -146,11 +146,16 @@ export const addCategoryArticle = async (req, res) => {
         return res.status(400).json({ success: false, message: 'CategoryArticle is required' });
     }
 
+    if (!Description) {
+        return res.status(400).json({ success: false, message: 'Description is required' });
+    }
+
     const image_filename = req.file.filename;
 
     const newCategoryArticle = new CategoryArticle({
         CategoryArticle: categoryArticleName,
-        image: image_filename
+        image: image_filename,
+        Description: Description
     });
 
     try {
@@ -161,6 +166,9 @@ export const addCategoryArticle = async (req, res) => {
         res.status(500).json({ success: false, message: 'Error adding CategoryArticle' });
     }
 };
+
+
+
 
 // List all categories
 export const listCategoriesArticle = async (req, res) => {
