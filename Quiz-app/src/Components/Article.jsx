@@ -64,17 +64,18 @@ const Article = ({ url }) => {
   const renderArticlesByCategory = (categoryTitle, articles, ref) => (
     <>
       {articles.length > 0 && (
-        <div ref={ref} id={categoryTitle.toLowerCase()} className="mb-8">
+        <div ref={ref} id={categoryTitle.toLowerCase()} className="mb-8 bg-gray-50 ">
           <h2 className="text-xl md:text-4xl font-bold text-black mb-6 uppercase px-3">{categoryTitle} level</h2>
           {articles.map((article) => (
-            <div key={article._id} className="w-full mb-8 p-3 sm:p-6 bg-gray-50 rounded-lg shadow-md border">
+            <div key={article._id} className="w-full mb-8 p-3 sm:p-6 ">
               <h3 className="text-xl sm:text-3xl font-bold text-black mb-4">{article.Question}</h3>
+              <p className="text-gray-700 my-4 font-semibold">{article.text1}</p>
               <div className="my-4">
               </div>
               {article.image && (
                 <img src={`${url}/images/${article.image}`} alt="Article Visual" className="object-contain mx-auto mb-4 rounded-lg" />
               )}
-              <p className="text-gray-700 my-4 font-semibold">{article.text1}</p>
+              
               <p className="text-gray-700 my-4 font-semibold">{article.text2}</p>
               {article.liText && (
                 <ul className="list-disc list-inside mb-4">
