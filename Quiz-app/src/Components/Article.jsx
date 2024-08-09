@@ -64,10 +64,10 @@ const Article = ({ url }) => {
   const renderArticlesByCategory = (categoryTitle, articles, ref) => (
     <>
       {articles.length > 0 && (
-        <div ref={ref} id={categoryTitle.toLowerCase()} className="mb-8 bg-gray-50 ">
-          <h2 className="text-xl md:text-4xl font-bold text-black mb-6 uppercase px-3">{categoryTitle} level</h2>
+        <div ref={ref} id={categoryTitle.toLowerCase()} className=" bg-gray-100 my-8 rounded-2xl ">
+          <h2 className="text-xl md:text-4xl font-bold text-black  uppercase pt-6 pl-3">{categoryTitle} level</h2>
           {articles.map((article) => (
-            <div key={article._id} className="w-full mb-8 p-3 sm:p-6 ">
+            <div key={article._id} className="w-full  p-3 sm:p-6 ">
               <h3 className="text-xl sm:text-3xl font-bold text-black mb-4">{article.Question}</h3>
               <p className="text-gray-700 my-4 font-semibold">{article.text1}</p>
               <div className="my-4">

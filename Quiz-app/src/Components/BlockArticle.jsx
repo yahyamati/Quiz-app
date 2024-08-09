@@ -17,13 +17,13 @@ const BlockArticle = ({ category, articles, navigate }) => {
       <div className="flex justify-between items-center ">
         <p className="uppercase font-bold text-center">{category}</p>
         <div onClick={toggleDescription} className="cursor-pointer">
-          {isDescriptionVisible ? <IoChevronUp size={20} /> : <IoChevronDown size={20} />}
+          {isDescriptionVisible ? <IoChevronUp className='hover:bg-gray-300 rounded-full p-1 size-6' /> : <IoChevronDown className='hover:bg-gray-300 rounded-full p-1 size-6' />}
         </div>
       </div>
       {isDescriptionVisible && (
-        <div className="grid gap-2 text-slate-600 text-sm">
+        <div className="grid gap-2 text-slate-600 text-sm ">
           {articles.map((article) => (
-            <div key={article._id} className="rounded-md p-2 bg-white shadow-sm">
+            <div key={article._id} className="rounded-md p-2 bg-white shadow-md">
               <p>{article.Description}</p>
             </div>
           ))}
