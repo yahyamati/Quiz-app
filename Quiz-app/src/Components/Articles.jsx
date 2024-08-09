@@ -2,7 +2,8 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import BlockArticle from './BlockArticle';
 import { useNavigate } from 'react-router-dom';
-
+import { IoArrowBackOutline } from "react-icons/io5";
+import { Link } from 'react-router-dom';
 const Articles = ({ url }) => {
   const [articles, setArticles] = useState([]);
   const navigate = useNavigate();
@@ -21,25 +22,37 @@ const Articles = ({ url }) => {
     fetchArticles();
   }, [url]);
 
-  // Filter unique categories
-  const uniqueCategories = Array.from(new Set(articles.map(article => article.category2)));
+  const groupedArticles = articles.reduce((acc, article) => {
+    if (!acc[article.category2]) {
+      acc[article.category2] = [];
+    }
+    acc[article.category2].push(article);
+    return acc;
+  }, {});
+
+  const uniqueCategories = Object.keys(groupedArticles);
 
   return (
     <>
-      <div className="flex flex-wrap gap-6 lg:justify-between items-center px-10 justify-center py-6">
-        {uniqueCategories.map((category) => {
-          const article = articles.find(article => article.category2 === category);
-          return (
-            <BlockArticle
-              key={category}
-              category={article.category2}
-              imgSrc={article.image}
-              navigate={navigate}
-              url={url}
-            />
-          );
-        })}
-      </div>
+    <div className="table mx-auto mt-6">
+                        <Link
+                            to="/"
+                            className="flex items-center gap-1 justify-center w-fit cursor-pointer text-gray-600 hover:underline underline-offset-2 "
+                        >
+                            <IoArrowBackOutline className="size-5" />
+                            <span className="font-semibold">Go back to Home Page</span>
+                        </Link>
+                    </div>
+      <div className="flex flex-wrap gap-6 lg:justify-evenly items-center px-10 justify-center py-6">
+      {uniqueCategories.map((category) => (
+        <BlockArticle
+          key={category}
+          category={category}
+          articles={groupedArticles[category]} // Pass the articles for this category
+          navigate={navigate}
+        />
+      ))}
+    </div>
     </>
   );
 }
