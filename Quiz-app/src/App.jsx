@@ -12,7 +12,7 @@ const Articles = lazy(() => import('./Components/Articles'));
 const Article = lazy(() => import('./Components/Article'));
 
 function App() {
-  const url = "http://localhost:4000"; // Adjust this to your backend URL
+  const url = "https://quiz-app-backend-rdot.onrender.com"; // Adjust this to your backend URL
   return (
     <div className="flex flex-col min-h-screen">
       <Router>

@@ -14,7 +14,7 @@ useEffect(() => {
 useEffect(() => {
   const fetchQuizzes = async () => {
       try {
-          const response = await axios.get(`http://localhost:4000/api/quiz/listFil?category=${category}`);
+          const response = await axios.get(`https://quiz-app-backend-rdot.onrender.com/api/quiz/listFil?category=${category}`);
           setQuizzes(response.data.data);
       } catch (error) {
           console.error('There was an error fetching the quizzes!', error);

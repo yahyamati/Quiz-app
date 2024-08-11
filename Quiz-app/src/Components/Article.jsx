@@ -12,7 +12,7 @@ const Article = ({ url }) => {
   const [currentSection, setCurrentSection] = useState('');
 
   const beginnersRef = useRef(null);
-  const intermediateRef = useRef(null);
+  const intermediateRef = useRef(null); 
   const advancedRef = useRef(null);
 
   useEffect(() => {
@@ -127,7 +127,7 @@ const Article = ({ url }) => {
           {renderArticlesByCategory("Advanced", articles.advanced, advancedRef)}
         </div>
       </div>
-      <div className="hidden w-full lg:table text-center">
+      <div className="hidden w-full sm:table text-center">
         <div className="sticky top-20">
           <div className="flex flex-col space-y-2">
             <h2 className="text-2xl font-bold">List of Categories</h2>
