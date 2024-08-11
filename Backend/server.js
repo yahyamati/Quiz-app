@@ -10,7 +10,7 @@ import Quiz from "./models/QuizModel.js";
 
 //app config
 const app = express()
-const port = 4000 //my port
+const port = process.env.PORT || 4000 ;//my port
 
 
 
