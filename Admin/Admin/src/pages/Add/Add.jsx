@@ -15,7 +15,7 @@ const Add = () => {
     // Fetch categories on component mount
     const fetchCategories = async () => {
       try {
-        const response = await axios.get('http://localhost:4000/api/quiz/listCategory');
+        const response = await axios.get('https://quiz-app-backend-rdot.onrender.com/api/quiz/listCategory');
         if (response.data.success) {
           setCategories(response.data.data); 
         } else {

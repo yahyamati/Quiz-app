@@ -15,7 +15,7 @@ import ListCategoryArticle from './pages/ListCategoryArticle/ListCategoryArticle
 
 
 function App() {
-  const url = "http://localhost:4000"; // Adjust this to your backend URL
+  const url = "https://quiz-app-backend-rdot.onrender.com"; // Adjust this to your backend URL
   return (
       <div>   
         <ToastContainer />
