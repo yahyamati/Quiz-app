@@ -166,7 +166,7 @@ const Quizzes = ({url}) => {
                     <p className="mx-auto font-semibold table p-6 md:text-xl text-gray-500 text-center">
                         Test, rate and improve your {category} knowledge with these questions.
                     </p>
-                    <div className="border p-4 my-4 rounded-xl shadow-lg mx-auto table md:w-5/12 w-11/12 mb-20">
+                    <div className="border p-4 my-4 rounded-xl shadow-lg mx-auto table md:w-7/12 w-11/12 mb-20">
                         <ProgressBar progressPercentage={progressPercentage} skippedCount={skippedCount} passedCount={passedCount} totalQuestions={totalQuestions} currentIndex={currentIndex} home={false} />
                         <h2
                             className={`text-xl font-semibold mx-auto table ${
