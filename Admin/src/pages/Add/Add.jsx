@@ -46,7 +46,7 @@ const Add = () => {
     };
 
     try {
-      const response = await axios.post('http://localhost:4000/api/quiz/add', quizData);
+      const response = await axios.post('https://quiz-app-backend-rdot.onrender.com/api/quiz/add', quizData);
       if (response.data.success) {
         toast.success(response.data.message);
         setQuestionText('');
