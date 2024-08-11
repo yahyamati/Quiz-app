@@ -29,7 +29,7 @@ const CodeSnippet = ({ codeString, language }) => {
       <SyntaxHighlighter
         language={language}
         style={oneDark}
-        className="rounded-b-lg bg-slate-900 overflow-scroll text-xs md:text-lg overflow-x-auto w-64 2xs:w-80 xs:w-full"
+        className="rounded-b-lg bg-slate-900 overflow-scroll text-xs md:text-lg overflow-x-auto w-full"
       >
         {codeString}
       </SyntaxHighlighter>
