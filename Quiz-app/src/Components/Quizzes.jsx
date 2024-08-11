@@ -194,7 +194,7 @@ const Quizzes = ({url}) => {
                         </div>
                         {revealed && (
                             <div className="mt-4 slide-up">
-                                <div className="bg-slate-100 p-4 rounded-xl mb-6">
+                                <div className="bg-slate-100 xs:p-4 rounded-xl mb-6">
                                     <p className="text-gray-700">
                                         {quizzes[currentIndex].question.answer.text}
                                     </p>
@@ -214,7 +214,7 @@ const Quizzes = ({url}) => {
                                 )}
                             </div>
                         )}
-                        <div className="flex justify-center xs:justify-between mt-10 flex-wrap gap-4 sm:gap-0">
+                        <div className="flex justify-center xs:justify-between mt-10 flex-wrap gap-4 sm:gap-0 text-sm xs:text-lg">
                             <button
                                 onClick={handlePass}
                                 className="font-semibold underline-offset-2 underline text-green-500 hover:text-green-600 transition ease-in-out"

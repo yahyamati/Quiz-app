@@ -14,7 +14,7 @@ const CodeSnippet = ({ codeString, language }) => {
   };
 
   return (
-    <div className="rounded-lg shadow-xl p-2 border relative">
+    <div className="rounded-lg shadow-xl p-2 border">
       <div className="flex justify-between items-center text-black rounded-t-lg">
         <span className="underline font-bold">Code Example :</span>
         <button
@@ -26,13 +26,16 @@ const CodeSnippet = ({ codeString, language }) => {
           {copied ? <FaCheck className="text-green-500" /> : <FaCopy />}
         </button>
       </div>
-      <SyntaxHighlighter
-        language={language}
-        style={oneDark}
-        className="rounded-b-lg bg-slate-900 overflow-scroll text-xs md:text-lg overflow-x-auto w-full"
-      >
-        {codeString}
-      </SyntaxHighlighter>
+      <div className="syntax-highlighter-wrapper">
+  <SyntaxHighlighter
+    language={language}
+    style={oneDark}
+    className=" text-xs md:text-lg"
+  >
+    {codeString}
+  </SyntaxHighlighter>
+</div>
+
       <Tooltip id="copy-tooltip" place="top" />
     </div>
   );
