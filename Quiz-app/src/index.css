@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+
+.syntax-highlighter-wrapper {
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+}
+
 @keyframes slideUp {
     from {
       opacity: 0;
