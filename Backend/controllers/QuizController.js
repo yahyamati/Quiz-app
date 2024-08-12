@@ -91,7 +91,7 @@ const addCategory = async (req, res) => {
     return res.status(400).json({ success: false, message: 'No image file uploaded' });
   }
 
-  const image_filename = req.file.filename;
+  const image_filename =`${req.file.filename}`;
 
   const category = new Category({
     category: req.body.category,

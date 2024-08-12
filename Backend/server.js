@@ -13,7 +13,8 @@ const app = express()
 const port = process.env.PORT || 4000 ;//my port
 
 
-
+//static files
+app.use("/images",express.static('uploads'));
 
 
 
@@ -27,7 +28,7 @@ app.use(cors()) //we can access backend for any frontend
 app.use('/api/user',userRouter);
 app.use('/api/quiz', quizRoutes);
 app.use('/api/articles', articleRoutes);
-app.use("/images",express.static('uploads'));
+
 
 
 
@@ -40,6 +41,7 @@ app.get("/",(req,res)=>{
     res.send("API Working")
 
 })
+
 app.get('/api/quiz/list', async (req, res) => {
     const category = req.query.category;
     let filter = {};
