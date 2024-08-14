@@ -91,11 +91,11 @@ const addCategory = async (req, res) => {
     return res.status(400).json({ success: false, message: 'No image file uploaded' });
   }
 
-  const image_filename =`${req.file.filename}`;
+  const image_url = req.file.path;
 
   const category = new Category({
     category: req.body.category,
-    image: image_filename
+    image: image_url,
   });
 
   try {
@@ -106,6 +106,7 @@ const addCategory = async (req, res) => {
     res.status(500).json({ success: false, message: 'Error adding category' });
   }
 };
+
 
 
 const listCategories = async (req, res) => {
