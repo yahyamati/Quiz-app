@@ -41,7 +41,7 @@ const ListCategory = ({ url }) => {
         <ul>
           {categories.map((category) => (
             <li key={category._id} className="category-item">
-              <img src={`${url}/images/${category.image}`} alt={category.category} />
+              <img src={category.image} alt={category.category} className="category-image" />
               <div className="category-info">
                 <p><strong></strong> {category.category}</p>
               </div>

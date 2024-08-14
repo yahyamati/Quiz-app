@@ -1,21 +1,26 @@
-// Category.js
 import React, { useState } from 'react';
 import axios from 'axios';
 import './Category.css';
-import uploadArea from '../../assets/upload_area.png'; 
+import uploadArea from '../../assets/upload_area.png';
 
 const Category = () => {
   const [categoryName, setCategoryName] = useState('');
   const [image, setImage] = useState(null);
 
+  // Handle category name change
   const handleCategoryChange = (e) => {
     setCategoryName(e.target.value);
   };
 
+  // Handle image file change
   const handleImageChange = (e) => {
-    setImage(e.target.files[0]);
+    const file = e.target.files[0];
+    if (file) {
+      setImage(file);
+    }
   };
 
+  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -43,16 +48,27 @@ const Category = () => {
     }
   };
 
+  // Create an object URL for the image preview
+  const imagePreviewUrl = image ? URL.createObjectURL(image) : uploadArea;
+
+  // Cleanup object URL when component unmounts
+  React.useEffect(() => {
+    return () => {
+      if (image) {
+        URL.revokeObjectURL(imagePreviewUrl);
+      }
+    };
+  }, [imagePreviewUrl]);
+
   return (
     <div className="category-form">
       <h1>Add Category</h1>
       <form onSubmit={handleSubmit}>
-       
         <div className="add-img-upload flex-col">
           <p>Upload Image</p>
           <label htmlFor="image">
             <img
-              src={image ? URL.createObjectURL(image) : uploadArea}
+              src={imagePreviewUrl}
               alt="Upload Area"
             />
           </label>
@@ -64,7 +80,6 @@ const Category = () => {
             required
           />
         </div>
-
         <div className="form-group">
           <label htmlFor="categoryName">Category Name:</label>
           <input
