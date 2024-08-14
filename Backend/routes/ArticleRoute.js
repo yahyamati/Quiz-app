@@ -1,22 +1,15 @@
 import express from 'express';
-import multer from 'multer';
-import { addArticle, getAllArticles, getArticleById, updateArticle, deleteArticle, addCategoryArticle, listCategoriesArticle, removeCategoryArticle, listFiltredArticle } from '../controllers/Article.js';
+import { upload } from '../config/cloudinary.js'; // Adjust path as necessary
+import { addArticle, getAllArticles, getArticleById, deleteArticle, addCategoryArticle, listCategoriesArticle, removeCategoryArticle, listFiltredArticle } from '../controllers/Article.js';
 
 const router = express.Router();
 
-const storage = multer.diskStorage({
-    destination: 'uploads',
-    filename: (req, file, cb) => {
-        return cb(null, `${Date.now()}${file.originalname}`);
-    }
-});
 
-const upload = multer({ storage: storage });
 
-router.post('/add', upload.single('image'), addArticle);
+
+router.post('/add',upload.single('image'), addArticle);
 router.get('/get', getAllArticles);
 router.get('/getById/:id', getArticleById);
-router.put('/update/:id', upload.single('image'), updateArticle);
 router.post('/remove', deleteArticle);
 router.post('/addCategoryArticle', upload.single('image'), addCategoryArticle);
 router.get('/listCategoryArticle', listCategoriesArticle);

@@ -3,8 +3,8 @@ import CategoryArticle from '../models/CategoryArticleModel.js';
 
 // Add a new article
 export const addArticle = async (req, res) => {
-    const { question, text1, text2, liText, text3, category1,category2 } = req.body;
-    const image_filename = req.file ? req.file.filename : null;
+    const { question, text1, text2, liText, text3, category1, category2 } = req.body;
+    const image_url = req.file.path;
 
     if (!category1 || !category2) {
         return res.status(400).json({ success: false, message: 'Both categories are required' });
@@ -14,7 +14,7 @@ export const addArticle = async (req, res) => {
         const newArticle = new Article({
             Question: question, // Ensure field names match
             text1,
-            image: image_filename,
+            image: image_url, // Store full URL
             text2,
             liText: JSON.parse(liText),
             text3,
@@ -78,35 +78,7 @@ export const getArticleById = async (req, res) => {
     }
 };
 
-// Update an article
-export const updateArticle = async (req, res) => {
-    const { text1, image, text2, liText, text3 } = req.body;
 
-    try {
-        const updatedArticle = await Article.findByIdAndUpdate(
-            req.params.id,
-            { text1, image, text2, liText, text3 },
-            { new: true }
-        );
-
-        if (!updatedArticle) {
-            return res.status(404).json({
-                success: false,
-                message: 'Article not found'
-            });
-        }
-
-        res.status(200).json({
-            success: true,
-            data: updatedArticle
-        });
-    } catch (err) {
-        res.status(500).json({
-            success: false,
-            message: err.message
-        });
-    }
-};
 
 // Delete an article
 export const deleteArticle = async (req, res) => {
@@ -134,14 +106,18 @@ export const removeCategoryArticle = async (req, res) => {
     }
 };
 
+
+
 // Add a new CategoryArticle
 export const addCategoryArticle = async (req, res) => {
     const { CategoryArticle: categoryArticleName, Description } = req.body;
 
+    // Ensure a file is uploaded
     if (!req.file) {
         return res.status(400).json({ success: false, message: 'No image file uploaded' });
     }
 
+    // Ensure required fields are provided
     if (!categoryArticleName) {
         return res.status(400).json({ success: false, message: 'CategoryArticle is required' });
     }
@@ -150,16 +126,20 @@ export const addCategoryArticle = async (req, res) => {
         return res.status(400).json({ success: false, message: 'Description is required' });
     }
 
-    const image_filename = req.file.filename;
-
-    const newCategoryArticle = new CategoryArticle({
-        CategoryArticle: categoryArticleName,
-        image: image_filename,
-        Description: Description
-    });
-
     try {
+        // Get the image URL from Cloudinary
+        const image_url = req.file.path;
+
+        // Create a new CategoryArticle document
+        const newCategoryArticle = new CategoryArticle({
+            CategoryArticle: categoryArticleName,
+            image: image_url,
+            Description: Description
+        });
+
+        // Save the document to the database
         await newCategoryArticle.save();
+
         res.json({ success: true, message: 'CategoryArticle added successfully' });
     } catch (error) {
         console.error('Error adding CategoryArticle:', error);
