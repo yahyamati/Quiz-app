@@ -15,6 +15,8 @@ const Article = ({ url }) => {
   const intermediateRef = useRef(null); 
   const advancedRef = useRef(null);
 
+ 
+
   useEffect(() => {
     const fetchArticles = async () => {
       try {
@@ -73,7 +75,11 @@ const Article = ({ url }) => {
               <div className="my-4">
               </div>
               {article.image && (
-                <img src={`${url}/images/${article.image}`} alt="Article Visual" className="object-contain mx-auto mb-4 rounded-lg" />
+                <img
+                  src={`${article.image}`}
+                  alt="Article Visual"
+                  className="object-contain mx-auto mb-4 rounded-lg"
+                />
               )}
               
               <p className="text-gray-700 my-4 font-semibold">{article.text2}</p>
