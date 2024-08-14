@@ -10,7 +10,7 @@ const ListCategoryArticle = ({ url }) => {
     // Fetch categories on component mount
     const fetchCategories = async () => {
       try {
-        const response = await axios.get(`${url}/api/articles/listCategoryArticle`);
+        const response = await axios.get(`https://quiz-app-backend-rdot.onrender.com/api/articles/listCategoryArticle`);
         if (response.data.success) {
           setCategories(response.data.data);
         } else {
@@ -41,7 +41,7 @@ const ListCategoryArticle = ({ url }) => {
         <ul>
           {categories.map((category) => (
             <li key={category._id} className="category-item">
-              <img src={`${url}/images/${category.image}`} alt={category.CategoryArticle} />
+             <img src={category.image} alt={category.category} className="category-image" />
               <div className="category-info">
                 <p><strong></strong> {category.CategoryArticle}</p>
               </div>
