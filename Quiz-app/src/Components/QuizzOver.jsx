@@ -16,7 +16,7 @@ const QuizOver = ({
 
 
     return (
-        <div className="flex flex-col items-center justify-center h-80 mx-10">
+        <div className="flex flex-col items-center justify-center h-[70vh] mx-10">
             <Link
             onClick={() => clearCategoryLocalStorage(category)}
             to="/"
