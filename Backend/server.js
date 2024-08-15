@@ -5,7 +5,7 @@ import userRouter from './routes/UserRoute.js';
 import quizRoutes from './routes/QuizRoute.js';
 import articleRoutes from './routes/ArticleRoute.js';
 import dotenv from 'dotenv';
-import { upload } from './config/cloudinary.js'; // Adjust the path as necessary
+
 
 dotenv.config(); // Load environment variables
 
@@ -15,7 +15,11 @@ const port = process.env.PORT || 4000;
 
 // Middleware
 app.use(express.json()); // Parse JSON
-app.use(cors()); // Allow cross-origin requests
+app.use(cors({
+  origin: 'https://quiz-app-admin.onrender.com', // Allow only this origin
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true, // Allow credentials if necessary
+}));
 
 // API endpoints
 app.use('/api/user', userRouter);

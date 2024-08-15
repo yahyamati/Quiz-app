@@ -4,7 +4,7 @@ import CategoryArticle from '../models/CategoryArticleModel.js';
 // Add a new article
 export const addArticle = async (req, res) => {
     const { question, text1, text2, liText, text3, category1, category2 } = req.body;
-    const image_url = req.file.path;
+    const image_url = req.file ? req.file.path : null;
 
     if (!category1 || !category2) {
         return res.status(400).json({ success: false, message: 'Both categories are required' });
