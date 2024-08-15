@@ -25,6 +25,11 @@ app.use('/api/articles', articleRoutes);
 // DB connection
 connectDB();
 
+// Ping endpoint to keep the backend awake
+app.get('/ping', (req, res) => {
+  res.send('pong');
+});
+
 app.get("/", (req, res) => {
   res.send("API Working");
 });
