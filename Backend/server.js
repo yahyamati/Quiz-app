@@ -15,7 +15,10 @@ const port = process.env.PORT || 4000;
 
 // Middleware
 app.use(express.json()); // Parse JSON
-app.use(cors()); // Allow cross-origin requests
+app.use(cors({
+  origin: 'https://quiz-app-admin.onrender.com', // Your frontend URL
+  optionsSuccessStatus: 200
+}));
 
 // API endpoints
 app.use('/api/user', userRouter);
