@@ -16,7 +16,7 @@ const port = process.env.PORT || 4000;
 // Middleware
 app.use(express.json()); // Parse JSON
 app.use(cors({
-  origin: 'https://quiz-app-admin.onrender.com', // Allow only this origin
+  origin: ['https://quiz-app-admin.onrender.com', 'https://quiz-app-frontend-k2go.onrender.com'], // Allow both origins
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true, // Allow credentials if necessary
 }));
