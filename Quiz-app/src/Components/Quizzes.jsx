@@ -123,18 +123,15 @@ const Quizzes = ({url}) => {
         angular: 'typescript',
         spring: 'java',
         flutter: 'dart',
-        'react.js': 'jsx',
+        reactjs: 'jsx',
         rails: 'ruby',
         'C#': 'csharp',
-        'asp.net': 'csharp',
-        'vue.js': 'javascript',
-        'express.js': 'javascript',
-        'node.js': 'javascript',
-        'next js': 'jsx',
+        vuejs: 'javascript',
+        expressjs: 'javascript',
+        nodejs: 'javascript',
+        nextjs: 'jsx',
         mysql: 'sql',
         postgresql: 'sql',
-        nodejs: 'javascript',
-
         // Add more frameworks and their languages as needed
     };
     const language = frameworkToLanguageMap[category.toString().toLowerCase()] || category.toString().toLowerCase();
