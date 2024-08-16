@@ -130,7 +130,11 @@ const Quizzes = ({url}) => {
         'vue.js': 'javascript',
         'express.js': 'javascript',
         'node.js': 'javascript',
-        'next.js': 'javascript',        
+        'next.js': 'javascript',
+        mysql: 'sql',
+        postgresql: 'sql',
+        nodejs: 'javascript',
+
         // Add more frameworks and their languages as needed
     };
     const language = frameworkToLanguageMap[category.toString().toLowerCase()] || category.toString().toLowerCase();
@@ -194,7 +198,7 @@ const Quizzes = ({url}) => {
                         </div>
                         {revealed && (
                             <div className="mt-4 slide-up">
-                                <div className="bg-slate-100 xs:p-4 rounded-xl mb-6">
+                                <div className="bg-slate-100 p-3 xs:p-4 rounded-xl mb-6">
                                     <p className="text-gray-700">
                                         {quizzes[currentIndex].question.answer.text}
                                     </p>
@@ -206,7 +210,7 @@ const Quizzes = ({url}) => {
                                             codeString={quizzes[currentIndex].example}
                                         />
                                         {quizzes[currentIndex].explainExample && (
-                                            <div className="bg-slate-100 p-4 rounded-xl mt-6">
+                                            <div className="bg-slate-100 p-3 xs:p-4 rounded-xl mt-6">
                                                 <p className="text-gray-700">{quizzes[currentIndex].explainExample}</p>
                                             </div>
                                         )}
