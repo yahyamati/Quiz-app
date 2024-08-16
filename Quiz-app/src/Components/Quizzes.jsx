@@ -130,7 +130,7 @@ const Quizzes = ({url}) => {
         'vue.js': 'javascript',
         'express.js': 'javascript',
         'node.js': 'javascript',
-        'next.js': 'javascript',
+        'next js': 'jsx',
         mysql: 'sql',
         postgresql: 'sql',
         nodejs: 'javascript',
