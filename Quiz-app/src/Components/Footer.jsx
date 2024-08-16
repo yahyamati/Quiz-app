@@ -8,7 +8,7 @@ const Footer = () => {
         <div className="flex flex-col items-center md:items-center space-y-4 md:w-1/3">
           <img src={assets.logo} alt="Logo" className="h-16" />
           <p className="text-center md:text-center text-sm md:text-base">
-            Welcome to Quiz, your go-to site for knowledge testing. Choose from diverse categories and engage in quizzes that help you learn, grow, and have fun.
+          Welcome to Train-urself, your ultimate destination for tech and programming Question. Choose from diverse categories, and read articles that help you learn, grow, and have fun.
           </p>
           <div className="flex space-x-4">
             <a href="https://facebook.com" className="transition-transform transform hover:scale-110">
