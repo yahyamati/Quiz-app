@@ -7,6 +7,7 @@ import QuizOver from "./QuizzOver";
 import ProgressBar from "./ProgressBar";
 import CodeSnippet from "./CodeSnippet";
 import Loading from "../Loading";
+import BoldText from "./BoldText";
 
 const Quizzes = ({url}) => {
     const { category } = useParams();
@@ -196,10 +197,10 @@ const Quizzes = ({url}) => {
                         {revealed && (
                             <div className="mt-4 slide-up">
                                 <div className="bg-slate-100 p-3 xs:p-4 rounded-xl mb-6">
-                                    <p className="text-gray-700">
-                                        {quizzes[currentIndex].question.answer.text}
-                                    </p>
+                                {/* Use BoldText component to render quizzes[currentIndex].question.answer.text */}
+                                <BoldText text={quizzes[currentIndex].question.answer.text} />
                                 </div>
+                        
                                 {quizzes[currentIndex].example && (
                                     <>
                                         <CodeSnippet
@@ -208,12 +209,12 @@ const Quizzes = ({url}) => {
                                         />
                                         {quizzes[currentIndex].explainExample && (
                                             <div className="bg-slate-100 p-3 xs:p-4 rounded-xl mt-6">
-                                                <p className="text-gray-700">{quizzes[currentIndex].explainExample}</p>
+                                                <BoldText text={quizzes[currentIndex].explainExample} />
                                             </div>
-                                        )}
-                                    </>
+                                    )}
+                                </>
                                 )}
-                            </div>
+                          </div>
                         )}
                         <div className="flex justify-center xs:justify-between mt-10 flex-wrap gap-4 sm:gap-0 text-sm xs:text-lg">
                             <button

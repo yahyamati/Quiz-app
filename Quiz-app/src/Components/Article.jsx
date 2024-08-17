@@ -1,7 +1,7 @@
 import { useParams } from "react-router";
 import axios from "axios";
 import { useEffect, useState, useRef } from "react";
-import Loading from "../Loading";
+import BoldText from "./BoldText";
 import { Link } from "react-router-dom";
 import { IoArrowBackOutline } from "react-icons/io5";
 
@@ -71,7 +71,7 @@ const Article = ({ url }) => {
           {articles.map((article) => (
             <div key={article._id} className="w-full  p-3 sm:p-6 ">
               <h3 className="text-xl sm:text-3xl font-bold text-black mb-4">{article.Question}</h3>
-              <p className="text-gray-700 my-4 font-semibold">{article.text1}</p>
+              <BoldText text={article.text1} className=" my-4"/>
               <div className="my-4">
               </div>
               {article.image && (
@@ -82,16 +82,16 @@ const Article = ({ url }) => {
                 />
               )}
               
-              <p className="text-gray-700 my-4 font-semibold">{article.text2}</p>
+              <BoldText text={article.text2} className=" my-4 "/>
               {article.liText && (
-                <ul className="list-disc list-inside mb-4">
+                <ol className="list-disc list-outside mb-4 ml-4">
                   {article.liText.map((li, index) => (
-                    <li key={index} className="text-gray-700">{li}</li>
+                    <li key={index} className="text-gray-700 my-2"><BoldText text={li}></BoldText></li>
                   ))}
-                </ul>
+                </ol>
               )}
-              <p className="text-gray-700 my-4 font-semibold">{article.text3}</p>
-            </div>
+              <BoldText text={article.text3} className=" my-4 "/>
+              </div>
           ))}
         </div>
       )}
