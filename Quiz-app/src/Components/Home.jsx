@@ -57,7 +57,7 @@ const Home = ({url}) => {
        <CiSearch className='size-6 absolute top-3 right-3 text-gray-500 cursor-pointer'/>
       </div>
 
-    <div className="flex flex-wrap gap-6 lg:justify-between items-center px-10 justify-center py-6">
+    <div className="flex flex-wrap gap-6 lg:justify-evenly items-center px-10 justify-center py-6">
     {filteredCategories.map((cat) => (
           <Block key={cat.category} category={cat.category} imgsrc={cat.image} navigate={navigate} url={url}/>
       ))}
