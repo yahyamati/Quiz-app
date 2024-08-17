@@ -67,10 +67,10 @@ const Article = ({ url }) => {
     <>
       {articles.length > 0 && (
         <div ref={ref} id={categoryTitle.toLowerCase()} className=" bg-gray-100 my-8 rounded-2xl ">
-          <h2 className="text-xl md:text-4xl font-bold text-black  uppercase pt-6 pl-3">{categoryTitle} level</h2>
+          <h2 className="text-xl sm:text-2xl md:text-4xl font-bold text-black uppercase pt-6 underline underline-offset-4 pl-3">{categoryTitle} level</h2>
           {articles.map((article) => (
             <div key={article._id} className="w-full  p-3 sm:p-6 ">
-              <h3 className="text-xl sm:text-3xl font-bold text-black mb-4">{article.Question}</h3>
+              <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-black mb-4">{article.Question}</h3>
               <BoldText text={article.text1} className=" my-4"/>
               <div className="my-4">
               </div>
