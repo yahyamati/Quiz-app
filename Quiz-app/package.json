@@ -10,7 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@monaco-editor/react": "^4.6.0",
     "axios": "^1.7.3",
+    "monaco-editor": "^0.50.0",
     "posthog-js": "^1.155.4",
     "quiz-app": "file:",
     "react": "^18.3.1",

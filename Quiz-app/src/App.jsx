@@ -6,6 +6,7 @@ import 'react-tooltip/dist/react-tooltip.css';
 import Navbar from './Components/Navbar';
 import Footer from './Components/Footer';
 import Loading from './Loading';
+import MonacoEditor from './Components/MonacoEditor';
 
 const Home = lazy(() => import('./Components/Home'));
 const Quizzes = lazy(() => import('./Components/Quizzes'));
@@ -42,6 +43,7 @@ function App() {
               <Route path="/articles/:category" element={<Article url={url} />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
+            
           </Suspense>
         </main>
         <Footer />
