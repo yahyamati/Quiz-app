@@ -7,7 +7,7 @@ const CodeEditor = ({ onChange }) => {
   .box {
     width: 100px;
     height: 100px;
-    background-color: red;
+    background-color: black;
   }
 </style>
 <div class="box"></div>
@@ -20,12 +20,14 @@ const CodeEditor = ({ onChange }) => {
 
   return (
     <div className="flex flex-col w-full p-4">
-      <h3 className="text-lg font-semibold mb-2">Code Editor</h3>
+      <h3 className="text-lg font-semibold mb-2 text-center">Code Editor</h3>
       <Editor
         height="300px"
         defaultLanguage="html"
         value={code}
         onChange={handleEditorChange}
+        theme='vs-dark'
+        className='p-2 bg-black rounded-2xl'
       />
     </div>
   );

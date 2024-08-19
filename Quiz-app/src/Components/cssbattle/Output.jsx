@@ -3,9 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 const Output = ({ combinedCode, targetImage }) => {
   const iframeRef = useRef(null);
   const containerRef = useRef(null);
-  const [outputWidth, setOutputWidth] = useState('50%'); // Initial width for the output area
-  const [linePosition, setLinePosition] = useState('50%'); // Initial line position
-
+  
   useEffect(() => {
     if (iframeRef.current && combinedCode) {
       const document = iframeRef.current.contentDocument;
@@ -38,47 +36,40 @@ const Output = ({ combinedCode, targetImage }) => {
     }
   }, [combinedCode]);
 
-  const handleMouseMove = (e) => {
-    if (containerRef.current) {
-      const containerRect = containerRef.current.getBoundingClientRect();
-      const mouseX = e.clientX - containerRect.left;
+  const [sliderPosition, setSliderPosition] = useState(50);
+  const [isDragging, setIsDragging] = useState(false);
 
-      // Calculate the clamped position for the vertical line
-      const containerWidth = containerRect.width;
-      const clampedLeft = Math.max(0, Math.min(mouseX, containerWidth));
+  const handleMove = (event) => {
+    if (!isDragging) return;
 
-      // Update the output width and line position
-      const newWidthPercentage = (clampedLeft / containerWidth) * 100;
-      setOutputWidth(`${newWidthPercentage}%`);
-      setLinePosition(`${clampedLeft}px`);
-    }
+    const rect = event.currentTarget.getBoundingClientRect();
+    const x = Math.max(0, Math.min(event.clientX - rect.left, rect.width));
+    const percent = Math.max(0, Math.min((x / rect.width) * 100, 100));
+
+    setSliderPosition(percent);
   };
 
-  const handleMouseEnter = () => {
-    document.addEventListener('mousemove', handleMouseMove);
+  const handleMouseDown = () => {
+    setIsDragging(true);
   };
 
-  const handleMouseLeave = () => {
-    document.removeEventListener('mousemove', handleMouseMove);
+  const handleMouseUp = () => {
+    setIsDragging(false);
   };
 
   return (
-    <div className="flex flex-col w-[400px] h-[300px] p-4">
-      <h3 className="text-lg font-semibold mb-2">Output</h3>
+    <div className="w-full flex flex-col p-4" onMouseUp={handleMouseUp}>
+      <h3 className="text-lg font-semibold mb-2 text-center">Output</h3>
       <div
         ref={containerRef}
-        className="relative border border-gray-300 rounded w-full h-full overflow-hidden"
-        style={{
-          backgroundImage: `url(${targetImage})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        }}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
+        className="relative w-full max-w-[700px] m-auto overflow-hidden select-none"
+        onMouseMove={handleMove}
+        onMouseDown={handleMouseDown}
       >
+        <img src={targetImage} alt="targetImage" />
         <div
-          className="absolute top-0 left-0 h-full overflow-hidden"
-          style={{ width: outputWidth }}
+          className="absolute top-0 left-0 right-0 w-full max-w-[700px] aspect-[70/45] m-auto overflow-hidden select-none"         
+          style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
         >
           <iframe
             ref={iframeRef}
@@ -87,9 +78,13 @@ const Output = ({ combinedCode, targetImage }) => {
         </div>
         {/* Vertical line indicator */}
         <div
-          className="absolute top-0 h-full w-1 bg-gray-500"
-          style={{ left: linePosition }}
-        />
+          className="absolute top-0 bottom-0 w-[1px] bg-gray-400 cursor-ew-resize"
+          style={{
+            left: `calc(${sliderPosition}% - 1px)`,
+          }}
+        >
+          <div className="bg-gray-400  absolute rounded-full h-3 w-3 -left-1 top-[calc(50%-5px)]" />
+        </div>
       </div>
     </div>
   );
