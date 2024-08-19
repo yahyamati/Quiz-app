@@ -5,6 +5,7 @@ import userRouter from './routes/UserRoute.js';
 import quizRoutes from './routes/QuizRoute.js';
 import articleRoutes from './routes/ArticleRoute.js';
 import dotenv from 'dotenv';
+import Cssrouter from './routes/CssBattleRoute.js';
 
 
 dotenv.config(); // Load environment variables
@@ -25,6 +26,8 @@ app.use(cors({
 app.use('/api/user', userRouter);
 app.use('/api/quiz', quizRoutes);
 app.use('/api/articles', articleRoutes);
+app.use('/api/CssBattle', Cssrouter);
+
 
 // DB connection
 connectDB();
