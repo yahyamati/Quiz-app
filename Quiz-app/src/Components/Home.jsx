@@ -5,6 +5,7 @@ import { CiSearch } from "react-icons/ci";
 import Block from './Block';
 import { Link } from 'react-router-dom';
 import MonacoEditor from './MonacoEditor';
+
 const Home = ({url}) => {
     const [categories, setCategories] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
@@ -66,9 +67,8 @@ const Home = ({url}) => {
     </div>
     </div>
     
-   
+  
 
-    
     
     </> );
 }
