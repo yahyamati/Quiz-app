@@ -7,6 +7,7 @@ const Output = ({ combinedCode, targetImage }) => {
   const [initialPosition, setInitialPosition] = useState(100); // Track initial position
   const [isAnimating, setIsAnimating] = useState(false); // State for animation
   const [opacity, setOpacity] = useState(1); // State for opacity
+  const [isDragging, setIsDragging] = useState(false); // State for dragging
 
   useEffect(() => {
     if (iframeRef.current && combinedCode) {
@@ -49,6 +50,16 @@ const Output = ({ combinedCode, targetImage }) => {
     setOpacity(0.9); // Set opacity to 0.9 while moving
   };
 
+  const handleTouchMove = (event) => {
+    const touch = event.touches[0];
+    const rect = event.currentTarget.getBoundingClientRect();
+    const x = Math.max(0, Math.min(touch.clientX - rect.left, rect.width));
+    const percent = Math.max(0, Math.min((x / rect.width) * 100, 100));
+
+    setSliderPosition(percent);
+    setOpacity(0.9); // Set opacity to 0.9 while moving
+  };
+
   const handleMouseEnter = () => {
     setIsHovered(true);
     setOpacity(1); // Set opacity to 1 when mouse enters
@@ -72,13 +83,24 @@ const Output = ({ combinedCode, targetImage }) => {
     }
   };
 
+  const handleTouchStart = () => {
+    setIsDragging(true);
+  };
+
+  const handleTouchEnd = () => {
+    setIsDragging(false);
+    // Reset slider position to initial position on touch end
+    setSliderPosition(initialPosition);
+  };
+
   return (
     <div
       className="w-full flex flex-col p-4"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
     >
-      <h3 className="text-lg font-semibold mb-2 text-center">Output Comparison</h3>
       <div className="relative w-full max-w-[700px] m-auto overflow-hidden">
         <img src={targetImage} alt="Target" className="w-full h-auto" />
         <div
@@ -100,6 +122,7 @@ const Output = ({ combinedCode, targetImage }) => {
         <div
           className={`absolute top-0 left-0 right-0 h-full ${isHovered ? 'cursor-ew-resize' : ''}`}
           onMouseMove={handleMove}
+          onTouchMove={handleTouchMove}
           onMouseDown={() => setIsDragging(true)}
           onMouseUp={() => setIsDragging(false)}
           style={{ zIndex: 20 }}

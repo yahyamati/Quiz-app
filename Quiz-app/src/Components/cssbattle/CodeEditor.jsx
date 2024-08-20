@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Editor from '@monaco-editor/react'; // Assuming you're using Monaco Editor
+import Editor from '@monaco-editor/react';
 
 const CodeEditor = ({ onChange }) => {
   const [code, setCode] = useState(`
@@ -27,6 +27,29 @@ const CodeEditor = ({ onChange }) => {
 
   const handleFontSizeChange = (newSize) => {
     setFontSize(newSize);
+  };
+
+  const editorDidMount = (editor) => {
+    // Set attributes for textarea
+    const textarea = editor.getDomNode().querySelector('textarea');
+    if (textarea) {
+      textarea.setAttribute('autocorrect', 'off');
+      textarea.setAttribute('autocapitalize', 'off');
+      textarea.setAttribute('translate', 'no');
+      textarea.setAttribute('contenteditable', 'true');
+      textarea.setAttribute('aria-autocomplete', 'list');
+      textarea.setAttribute('aria-multiline', 'true');
+    }
+
+    // Configure the editor for suggestions
+    editor.updateOptions({
+      wordBasedSuggestions: true, // Enable word-based suggestions
+      quickSuggestions: {
+        other: true,
+        comments: true,
+        strings: true,
+      },
+    });
   };
 
   return (
@@ -71,8 +94,8 @@ const CodeEditor = ({ onChange }) => {
         value={code}
         onChange={handleEditorChange}
         theme="vs-dark"
-        className="p-2 bg-black "
         options={{ fontSize }}
+        editorDidMount={editorDidMount} // Set the attributes and configure suggestions when editor mounts
       />
     </div>
   );
