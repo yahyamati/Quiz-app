@@ -1,24 +1,27 @@
 import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import CodeEditor from './CodeEditor';
 import Output from './Output';
 import Comparison from './Comparison';
 
 const CSSBattle = () => {
   const [combinedCode, setCombinedCode] = useState('');
-  const targetImage = '/src/content/4.png'; // Replace with your target image path
+  const location = useLocation();
+  const targetImage = location.state?.targetImage; // Retrieve the targetImage from the location state
 
   return (
-    <div className="container mx-auto py-8">
-      <div className="flex flex-wrap justify-between">
-        {/* Make CodeEditor take 50% of the page width and remove padding on the left */}
-        <div className="w-full sm:w-[50%] pl-0 p-2">
+    <div className="  py-8 h-[80vh] bg-gray-600 ">
+      <h1 className="text-2xl text-white font-bold tracking-tighter sm:text-4xl md:text-4xl lg:text-5xl mx-auto table">
+                  Test Your CSS SKills
+      </h1>
+      <div className="flex flex-wrap justify-between ">
+        <div className="w-full sm:w-[40%] p-2">
           <CodeEditor onChange={setCombinedCode} />
         </div>
-        {/* Adjust Output and Comparison to take the remaining space */}
-        <div className="w-full sm:w-[25%] p-2">
+        <div className="w-full sm:w-[30%] p-2 flex justify-center items-center">
           <Output combinedCode={combinedCode} targetImage={targetImage} />
         </div>
-        <div className="w-full sm:w-[25%] p-2">
+        <div className="w-full sm:w-[30%] p-2 flex justify-center items-center">
           <Comparison targetImage={targetImage} />
         </div>
       </div>

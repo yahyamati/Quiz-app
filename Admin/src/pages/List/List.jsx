@@ -27,7 +27,7 @@ const List = ({ url }) => {
       await axios.post(`${url}/api/quiz/remove`, { id });
       setQuizzes(quizzes.filter(quiz => quiz._id !== id));  // Update state to remove the deleted food item
     } catch (error) {
-      console.error("There was an error removing the food item!", error);
+      console.error("There was an error removing the item!", error);
     }
   };
 

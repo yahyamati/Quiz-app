@@ -50,3 +50,16 @@ export const getDesignById = async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 };
+
+export const removeCssImage = async (req, res) => {
+  const { id } = req.body;
+
+  try {
+    await Design.findByIdAndDelete(id);
+    res.json({ success: true, message: 'Image removed' });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: 'Error removing Image' });
+  }
+};
+

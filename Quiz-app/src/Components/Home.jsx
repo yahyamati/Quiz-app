@@ -34,11 +34,18 @@ const Home = ({url}) => {
     return ( 
     <>
     <div className="mx-10 mt-10 text-center ">
-      <Link to="/articles" className=" cursor-pointer max-w-[300px] mb-6 p-2 bg-gray-700 rounded-full items-center text-indigo-100 leading-none lg:rounded-full inline-flex">
-        <span className="flex rounded-full bg-indigo-500 uppercase px-2 py-1 text-xs font-bold mr-3">New</span>
-        <span className="font-semibold mr-2 text-left flex-auto">Read articles here</span>
-        <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" className="fill-current opacity-75 h-4 w-4"><path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path></svg>
-      </Link>
+      <div className='flex justify-center gap-10'>
+        <Link to="/articles" className=" cursor-pointer max-w-[300px] mb-6 p-3 bg-gray-700 rounded-full items-center text-indigo-100 leading-none lg:rounded-full inline-flex">
+          <span className="font-semibold mr-2 text-left">Read articles here</span>
+          <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" className="fill-current opacity-75 h-4 w-4"><path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path></svg>
+        </Link>
+        <Link to="/csschallenges" className=" cursor-pointer max-w-[300px] mb-6 p-2 bg-gray-700 rounded-full items-center text-indigo-100 leading-none lg:rounded-full inline-flex">
+          <span className="flex rounded-full bg-indigo-500 uppercase px-2 py-1 text-xs font-bold mr-3">New</span>
+          <span className="font-semibold mr-2 text-left flex-auto">Test Your CSS Skills</span>
+          <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" className="fill-current opacity-75 h-4 w-4"><path d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"></path></svg>
+        </Link> 
+      </div>
+      
 
 
     <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none mx-auto table">

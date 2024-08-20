@@ -1,5 +1,5 @@
 import express from 'express';
-import { createDesign,getDesigns,getDesignById } from '../controllers/CssBattleController.js';
+import { createDesign,getDesigns,getDesignById,removeCssImage } from '../controllers/CssBattleController.js';
 import { upload } from '../config/cloudinary.js'; // Adjust path as necessary
 
 
@@ -16,5 +16,6 @@ Cssrouter.get('/getall', getDesigns);
 // Route to get a design by ID
 Cssrouter.get('/:id', getDesignById);
 
+Cssrouter.post('/remove', removeCssImage);
 
 export default Cssrouter;

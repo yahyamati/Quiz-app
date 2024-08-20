@@ -14,6 +14,7 @@ const Articles = lazy(() => import('./Components/Articles'));
 const Article = lazy(() => import('./Components/Article'));
 const NotFound = lazy(() => import('./NotFound'));
 const CssBattle= lazy(() => import('./Components/cssbattle/CssBattle'));
+const SlideCard = lazy(() => import('./Components/SlideCard'));
 
 function App() {
   const url = "https://quiz-app-backend-rdot.onrender.com"; // Adjust this to your backend URL
@@ -42,7 +43,8 @@ function App() {
               <Route path="/category/:category" element={<Quizzes url={url} />} />
               <Route path="/articles" element={<Articles url={url} />} />
               <Route path="/articles/:category" element={<Article url={url} />} />
-              <Route path="/cssbattle" element={<CssBattle />} />
+              <Route path="/csschallenges" element={<SlideCard />} />
+              <Route path="/cssBattle/:id" element={<CssBattle />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
             

@@ -2,10 +2,10 @@ import React from 'react';
 
 const Comparison = ({ targetImage }) => {
   return (
-    <div className="flex flex-col w-full p-4">
+    <div className="flex flex-col w-full ">
       {/* Navbar */}
-      <div className="bg-gray-800 text-white p-2">
-        <h3 className="text-xl font-semibold">Recreate this target</h3>
+      <div className="bg-gray-800 text-white p-2 rounded-t-2xl">
+        <h3 className="text-xl font-semibold text-center">Recreate this Image</h3>
         {/* Add any additional navbar items here */}
       </div>
       
@@ -15,7 +15,7 @@ const Comparison = ({ targetImage }) => {
         <img
           src={targetImage}
           alt="Target"
-          className="border border-gray-300 w-full h-auto"
+          className=" w-full h-auto rounded-b-2xl"
          
         />
       </div>
