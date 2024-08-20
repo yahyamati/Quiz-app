@@ -53,22 +53,27 @@ const CodeEditor = ({ onChange }) => {
   };
 
   return (
-    <div className="flex flex-col w-full p-4 sticky top-0 bg-gray-900 z-50">
-      <div className="flex justify-between items-center bg-gray-800 p-2 rounded-t-2xl">
-        <h3 className="text-lg font-semibold text-white">Editor</h3>
-        <div className="flex items-center">
-          <span className="text-white mr-4">{code.length} characters</span>
-          <button
-            className="text-white bg-gray-700 px-3 py-1 rounded-md"
-            onClick={toggleFontSize}
-          >
-            Settings
-          </button>
+    <div className="relative flex flex-col w-full p-4">
+      {/* Navbar */}
+      <div className="bg-gray-900 text-white p-2">
+        <div className="flex justify-between items-center">
+          <h3 className="text-lg font-semibold">Editor</h3>
+          <div className="flex items-center">
+            <span className="text-white mr-4">{code.length} characters</span>
+            <button
+              className="text-white bg-gray-700 px-3 py-1 rounded-md"
+              onClick={toggleFontSize}
+            >
+              Settings
+            </button>
+          </div>
         </div>
       </div>
+
+      {/* Font Size Settings */}
       {showFontSize && (
         <div
-          className="absolute top-14 right-4 bg-gray-700 text-white p-4 rounded-md shadow-lg transition-opacity duration-300"
+          className="absolute top-12 right-4 bg-gray-700 text-white p-4 rounded-md shadow-lg transition-opacity duration-300"
           style={{
             opacity: showFontSize ? 1 : 0,
             zIndex: 100, // Ensure it is above everything else
@@ -88,6 +93,8 @@ const CodeEditor = ({ onChange }) => {
           </div>
         </div>
       )}
+
+      {/* Editor */}
       <Editor
         height="400px"
         defaultLanguage="html"

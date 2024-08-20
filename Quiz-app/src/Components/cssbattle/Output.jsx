@@ -8,6 +8,7 @@ const Output = ({ combinedCode, targetImage }) => {
   const [isAnimating, setIsAnimating] = useState(false); // State for animation
   const [opacity, setOpacity] = useState(1); // State for opacity
   const [isDragging, setIsDragging] = useState(false); // State for dragging
+  const [sliderEnabled, setSliderEnabled] = useState(true); // State for slider enabled/disabled
 
   useEffect(() => {
     if (iframeRef.current && combinedCode) {
@@ -42,6 +43,8 @@ const Output = ({ combinedCode, targetImage }) => {
   }, [combinedCode]);
 
   const handleMove = (event) => {
+    if (!sliderEnabled) return; // Do nothing if slider is disabled
+
     const rect = event.currentTarget.getBoundingClientRect();
     const x = Math.max(0, Math.min(event.clientX - rect.left, rect.width));
     const percent = Math.max(0, Math.min((x / rect.width) * 100, 100));
@@ -51,6 +54,8 @@ const Output = ({ combinedCode, targetImage }) => {
   };
 
   const handleTouchMove = (event) => {
+    if (!sliderEnabled) return; // Do nothing if slider is disabled
+
     const touch = event.touches[0];
     const rect = event.currentTarget.getBoundingClientRect();
     const x = Math.max(0, Math.min(touch.clientX - rect.left, rect.width));
@@ -93,48 +98,73 @@ const Output = ({ combinedCode, targetImage }) => {
     setSliderPosition(initialPosition);
   };
 
+  const toggleSlider = () => {
+    setSliderEnabled(prev => !prev);
+  };
+
   return (
-    <div
-      className="w-full flex flex-col p-4"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      onTouchStart={handleTouchStart}
-      onTouchEnd={handleTouchEnd}
-    >
-      <div className="relative w-full max-w-[700px] m-auto overflow-hidden">
-        <img src={targetImage} alt="Target" className="w-full h-auto" />
-        <div
-          className={`absolute top-0 left-0 right-0 h-full border ${isAnimating ? 'transition-clip' : ''}`}
-          style={{
-            clipPath: `inset(0 ${100 - sliderPosition}% 0 0)`,
-            backgroundColor: `rgba(255, 255, 255, ${opacity})`, // Apply opacity
-            zIndex: 10,
-            transition: isAnimating ? 'clip-path 0.5s ease-in-out' : 'none' // Smooth transition only when animating
-          }}
-        >
-          <iframe
-            ref={iframeRef}
-            className="w-full h-full border-none"
-            title="Output Frame"
-          />
+    <div className="relative flex flex-col w-full h-screen">
+      {/* Navbar */}
+      <div className="bg-gray-800 p-2">
+        <div className="flex justify-between items-center">
+          <h3 className="text-lg font-semibold text-white">Code Output</h3>
+          <div className="flex items-center">
+            <label className="flex items-center cursor-pointer">
+              <input
+                type="checkbox"
+                checked={sliderEnabled}
+                onChange={toggleSlider}
+                className="form-checkbox h-4 w-4 text-blue-600 transition duration-150 ease-in-out"
+              />
+              <span className="ml-2 text-white">Slide & Compare</span>
+            </label>
+          </div>
         </div>
-        {/* Slider container */}
+      </div>
+      
+      {/* Main Content */}
+      <div className="flex-1 overflow-auto ">
         <div
-          className={`absolute top-0 left-0 right-0 h-full ${isHovered ? 'cursor-ew-resize' : ''}`}
-          onMouseMove={handleMove}
-          onTouchMove={handleTouchMove}
-          onMouseDown={() => setIsDragging(true)}
-          onMouseUp={() => setIsDragging(false)}
-          style={{ zIndex: 20 }}
+          className="relative w-full max-w-[700px] m-auto overflow-hidden"
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
         >
-          {isHovered && (
-            <div
-              className="absolute top-0 bottom-0 w-[2px] bg-gray-400"
-              style={{ right: `calc(${100 - sliderPosition}% - 1px)` }} // Position on the right edge
-            >
-              <div className="bg-gray-400 absolute rounded-full h-4 w-4 -right-2 top-1/2 transform -translate-y-1/2" />
-            </div>
-          )}
+          <img src={targetImage} alt="Target" className="w-full h-auto" />
+          <div
+            className={`absolute top-0 left-0 right-0 h-full border ${isAnimating ? 'transition-clip' : ''}`}
+            style={{
+              clipPath: `inset(0 ${100 - sliderPosition}% 0 0)`,
+              backgroundColor: `rgba(255, 255, 255, ${opacity})`, // Apply opacity
+              zIndex: 10,
+              transition: isAnimating ? 'clip-path 0.5s ease-in-out' : 'none' // Smooth transition only when animating
+            }}
+          >
+            <iframe
+              ref={iframeRef}
+              className="w-full h-full border-none"
+              title="Output Frame"
+            />
+          </div>
+          {/* Slider container */}
+          <div
+            className={`absolute top-0 left-0 right-0 h-full ${isHovered ? 'cursor-ew-resize' : ''}`}
+            onMouseMove={handleMove}
+            onTouchMove={handleTouchMove}
+            onMouseDown={() => setIsDragging(true)}
+            onMouseUp={() => setIsDragging(false)}
+            style={{ zIndex: 20 }}
+          >
+            {isHovered && sliderEnabled && (
+              <div
+                className="absolute top-0 bottom-0 w-[2px] bg-gray-400"
+                style={{ right: `calc(${100 - sliderPosition}% - 1px)` }} // Position on the right edge
+              >
+                <div className="bg-gray-400 absolute rounded-full h-4 w-4 -right-2 top-1/2 transform -translate-y-1/2" />
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>
