@@ -32,7 +32,7 @@ const CSSBattle = () => {
   }, []);
   return (
     <div className="h-[calc(100vh-7rem)] bg-gray-600 ">
-      <div className="flex flex-wrap justify-between ">
+      <div className="flex flex-wrap justify-between  ">
         <div className="w-full sm:w-[40%]">
           <CodeEditor onChange={setCombinedCode} height={remainingHeight} />
         </div>

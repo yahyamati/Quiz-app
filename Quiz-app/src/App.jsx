@@ -1,31 +1,23 @@
-import React, { useEffect,useState, Suspense, lazy } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import React, { useEffect, useState, Suspense, lazy } from 'react';
+import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import './App.css';
 import 'react-tooltip/dist/react-tooltip.css';
 import Navbar from './Components/Navbar';
 import Footer from './Components/Footer';
 import Loading from './Loading';
-import { useParams } from 'react-router-dom';
 const Home = lazy(() => import('./Components/Home'));
 const Quizzes = lazy(() => import('./Components/Quizzes'));
 const Articles = lazy(() => import('./Components/Articles'));
 const Article = lazy(() => import('./Components/Article'));
 const NotFound = lazy(() => import('./NotFound'));
-const CssBattle= lazy(() => import('./Components/cssbattle/CssBattle'));
+const CssBattle = lazy(() => import('./Components/cssbattle/CssBattle'));
 const SlideCard = lazy(() => import('./Components/SlideCard'));
 
 function App() {
   const url = "https://quiz-app-backend-rdot.onrender.com"; // Adjust this to your backend URL
-  const [cssBattle, setCssBattle] = useState(false);
-  useEffect(() => {
-    const pathName = window.location.pathname;
-    if (pathName.split('/')[1] === 'cssBattle') {
-      setCssBattle(true);
-    } else {
-      setCssBattle(false);
-    }
-  }, [window.location.pathname]); 
+
+  // Ping backend periodically
   useEffect(() => {
     const pingBackend = () => {
       axios.get(`${url}/ping`)
@@ -54,15 +46,29 @@ function App() {
               <Route path="/cssBattle/:id" element={<CssBattle />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
-            
           </Suspense>
         </main>
-        {
-          !cssBattle && <Footer />
-        }
+        <FooterVisibilityHandler />
       </Router>
     </div>
   );
+}
+
+// Component to handle footer visibility
+function FooterVisibilityHandler() {
+  const location = useLocation(); // Get the current location
+  const [cssBattle, setCssBattle] = useState(false);
+
+  useEffect(() => {
+    const pathName = location.pathname;
+    if (pathName.split('/')[1] === 'cssBattle') {
+      setCssBattle(true);
+    } else {
+      setCssBattle(false);
+    }
+  }, [location.pathname]);  // Re-run this effect when the location changes
+
+  return !cssBattle && <Footer />;
 }
 
 export default App;

@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Editor from '@monaco-editor/react';
 
-const CodeEditor = ({ onChange,height }) => {
+const CodeEditor = ({ onChange, height }) => {
   const [code, setCode] = useState(`
 <div></div>
 <style>
@@ -15,6 +15,7 @@ const CodeEditor = ({ onChange,height }) => {
 
   const [fontSize, setFontSize] = useState(14);
   const [showFontSize, setShowFontSize] = useState(false);
+  const fontSizeRef = useRef(null);
 
   const handleEditorChange = (value) => {
     setCode(value);
@@ -52,6 +53,21 @@ const CodeEditor = ({ onChange,height }) => {
     });
   };
 
+  // Click outside to close the font size settings panel
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (fontSizeRef.current && !fontSizeRef.current.contains(event.target)) {
+        setShowFontSize(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   return (
     <div className="relative flex flex-col ">
       {/* Navbar */}
@@ -73,6 +89,7 @@ const CodeEditor = ({ onChange,height }) => {
       {/* Font Size Settings */}
       {showFontSize && (
         <div
+          ref={fontSizeRef} // Attach ref to the font size settings panel
           className="absolute top-12 right-4 bg-gray-700 text-white p-4 rounded-md shadow-lg transition-opacity duration-300"
           style={{
             opacity: showFontSize ? 1 : 0,
@@ -96,8 +113,8 @@ const CodeEditor = ({ onChange,height }) => {
 
       {/* Editor */}
       <Editor
-      height={`${height}px`}
-        className='p-1 bg-slate-800 '
+        height={`${height}px`}
+        className="p-1 bg-slate-800 "
         defaultLanguage="html"
         value={code}
         onChange={handleEditorChange}
