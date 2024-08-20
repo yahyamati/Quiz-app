@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Editor from '@monaco-editor/react';
 
-const CodeEditor = ({ onChange }) => {
+const CodeEditor = ({ onChange,height }) => {
   const [code, setCode] = useState(`
 <div></div>
 <style>
@@ -53,15 +53,15 @@ const CodeEditor = ({ onChange }) => {
   };
 
   return (
-    <div className="relative flex flex-col w-full p-4 ">
+    <div className="relative flex flex-col ">
       {/* Navbar */}
-      <div className="bg-gray-900 text-white p-2 rounded-t-2xl">
+      <div className="bg-gray-800 text-white py-1 px-2 border-t border-gray-600">
         <div className="flex justify-between items-center ">
           <h3 className="text-lg font-semibold">Editor</h3>
           <div className="flex items-center">
             <span className="text-white mr-4">{code.length} characters</span>
             <button
-              className="text-white bg-gray-700 px-3 py-1 rounded-md"
+              className="text-white bg-gray-700 px-2 rounded-md"
               onClick={toggleFontSize}
             >
               Settings
@@ -96,8 +96,8 @@ const CodeEditor = ({ onChange }) => {
 
       {/* Editor */}
       <Editor
-        height="350px"
-        className='p-1 bg-slate-900 rounded-b-2xl'
+      height={`${height}px`}
+        className='p-1 bg-slate-800 '
         defaultLanguage="html"
         value={code}
         onChange={handleEditorChange}

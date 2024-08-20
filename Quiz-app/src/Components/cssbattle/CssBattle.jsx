@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import CodeEditor from './CodeEditor';
 import Output from './Output';
@@ -6,22 +6,40 @@ import Comparison from './Comparison';
 
 const CSSBattle = () => {
   const [combinedCode, setCombinedCode] = useState('');
+  const [remainingHeight, setRemainingHeight] = useState(0);
+  const headerHeight = document.querySelector('header')?.offsetHeight || 0;
   const location = useLocation();
   const targetImage = location.state?.targetImage; // Retrieve the targetImage from the location state
 
+  useEffect(() => {
+    const calculateRemainingHeight = () => {
+      const headerHeight = document.querySelector('header')?.offsetHeight || 0;
+      const windowHeight = window.innerHeight;
+      const availableHeight = windowHeight - headerHeight ;
+      setRemainingHeight(availableHeight);
+    };
+
+    // Calculate height on initial render
+    calculateRemainingHeight();
+
+    // Recalculate height when window is resized
+    window.addEventListener('resize', calculateRemainingHeight);
+
+    // Cleanup listener on component unmount
+    return () => {
+      window.removeEventListener('resize', calculateRemainingHeight);
+    };
+  }, []);
   return (
-    <div className="  py-8 h-[80vh] bg-gray-600 ">
-      <h1 className="text-2xl text-white font-bold tracking-tighter sm:text-4xl md:text-4xl lg:text-5xl mx-auto table">
-                  Test Your CSS SKills
-      </h1>
+    <div className="h-[calc(100vh-7rem)] bg-gray-600 ">
       <div className="flex flex-wrap justify-between ">
-        <div className="w-full sm:w-[40%] p-2">
-          <CodeEditor onChange={setCombinedCode} />
+        <div className="w-full sm:w-[40%]">
+          <CodeEditor onChange={setCombinedCode} height={remainingHeight} />
         </div>
-        <div className="w-full sm:w-[30%] p-2 flex justify-center items-center">
+        <div className="w-full sm:w-[30%]">
           <Output combinedCode={combinedCode} targetImage={targetImage} />
         </div>
-        <div className="w-full sm:w-[30%] p-2 flex justify-center items-center">
+        <div className="w-full sm:w-[30%]">
           <Comparison targetImage={targetImage} />
         </div>
       </div>

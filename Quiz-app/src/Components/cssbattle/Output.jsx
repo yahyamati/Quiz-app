@@ -103,9 +103,9 @@ const Output = ({ combinedCode, targetImage }) => {
   };
 
   return (
-    <div className="relative flex flex-col w-full ">
+    <div className="relative flex flex-col w-full h-full">
       {/* Navbar */}
-      <div className="bg-gray-800 p-2 rounded-t-2xl">
+      <div className="bg-gray-800 p-1 px-2 border-t border-s border-gray-600">
         <div className="flex justify-between items-center ">
           <h3 className="text-lg font-semibold text-white">Code Output</h3>
           <div className="flex items-center">
@@ -123,9 +123,9 @@ const Output = ({ combinedCode, targetImage }) => {
       </div>
       
       {/* Main Content */}
-      <div className="flex-1  ">
+      <div className="flex-1 p-2 bg-gray-800 ">
         <div
-          className="relative w-full max-w-[700px] m-auto overflow-hidden rounded-b-2xl"
+          className="relative w-full max-w-[700px] m-auto overflow-hidden "
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
           onTouchStart={handleTouchStart}

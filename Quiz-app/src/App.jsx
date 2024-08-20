@@ -1,4 +1,4 @@
-import React, { useEffect, Suspense, lazy } from 'react';
+import React, { useEffect,useState, Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import axios from 'axios';
 import './App.css';
@@ -6,8 +6,7 @@ import 'react-tooltip/dist/react-tooltip.css';
 import Navbar from './Components/Navbar';
 import Footer from './Components/Footer';
 import Loading from './Loading';
-import MonacoEditor from './Components/MonacoEditor';
-
+import { useParams } from 'react-router-dom';
 const Home = lazy(() => import('./Components/Home'));
 const Quizzes = lazy(() => import('./Components/Quizzes'));
 const Articles = lazy(() => import('./Components/Articles'));
@@ -18,7 +17,15 @@ const SlideCard = lazy(() => import('./Components/SlideCard'));
 
 function App() {
   const url = "https://quiz-app-backend-rdot.onrender.com"; // Adjust this to your backend URL
-
+  const [cssBattle, setCssBattle] = useState(false);
+  useEffect(() => {
+    const pathName = window.location.pathname;
+    if (pathName.split('/')[1] === 'cssBattle') {
+      setCssBattle(true);
+    } else {
+      setCssBattle(false);
+    }
+  }, [window.location.pathname]); 
   useEffect(() => {
     const pingBackend = () => {
       axios.get(`${url}/ping`)
@@ -50,7 +57,9 @@ function App() {
             
           </Suspense>
         </main>
-        <Footer />
+        {
+          !cssBattle && <Footer />
+        }
       </Router>
     </div>
   );
