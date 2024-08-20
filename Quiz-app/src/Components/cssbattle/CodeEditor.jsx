@@ -8,7 +8,7 @@ const CodeEditor = ({ onChange }) => {
   div {
     width: 100px;
     height: 100px;
-    background: #dd6b4d;
+    background: red;
   }
 </style>
   `);
@@ -53,10 +53,10 @@ const CodeEditor = ({ onChange }) => {
   };
 
   return (
-    <div className="relative flex flex-col w-full p-4">
+    <div className="relative flex flex-col w-full p-4 ">
       {/* Navbar */}
-      <div className="bg-gray-900 text-white p-2">
-        <div className="flex justify-between items-center">
+      <div className="bg-gray-900 text-white p-2 rounded-t-2xl">
+        <div className="flex justify-between items-center ">
           <h3 className="text-lg font-semibold">Editor</h3>
           <div className="flex items-center">
             <span className="text-white mr-4">{code.length} characters</span>
@@ -96,7 +96,8 @@ const CodeEditor = ({ onChange }) => {
 
       {/* Editor */}
       <Editor
-        height="400px"
+        height="350px"
+        className='p-1 bg-slate-900 rounded-b-2xl'
         defaultLanguage="html"
         value={code}
         onChange={handleEditorChange}

@@ -103,10 +103,10 @@ const Output = ({ combinedCode, targetImage }) => {
   };
 
   return (
-    <div className="relative flex flex-col w-full h-screen">
+    <div className="relative flex flex-col w-full ">
       {/* Navbar */}
-      <div className="bg-gray-800 p-2">
-        <div className="flex justify-between items-center">
+      <div className="bg-gray-800 p-2 rounded-t-2xl">
+        <div className="flex justify-between items-center ">
           <h3 className="text-lg font-semibold text-white">Code Output</h3>
           <div className="flex items-center">
             <label className="flex items-center cursor-pointer">
@@ -123,9 +123,9 @@ const Output = ({ combinedCode, targetImage }) => {
       </div>
       
       {/* Main Content */}
-      <div className="flex-1 overflow-auto ">
+      <div className="flex-1  ">
         <div
-          className="relative w-full max-w-[700px] m-auto overflow-hidden"
+          className="relative w-full max-w-[700px] m-auto overflow-hidden rounded-b-2xl"
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
           onTouchStart={handleTouchStart}
