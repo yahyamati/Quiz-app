@@ -4,7 +4,7 @@ import { assets } from '../assets/assets';
 
 const Navbar = () => {
   return (
-    <nav className="bg-gray-800 p-4">
+    <nav id='header' className="bg-gray-800 p-4">
       <div className="container mx-auto flex items-center justify-between">
         <div className="text-white text-lg font-bold">
           <Link to="/">
