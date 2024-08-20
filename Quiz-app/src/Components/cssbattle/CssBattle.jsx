@@ -2,23 +2,24 @@ import React, { useState } from 'react';
 import CodeEditor from './CodeEditor';
 import Output from './Output';
 import Comparison from './Comparison';
+
 const CSSBattle = () => {
   const [combinedCode, setCombinedCode] = useState('');
-
   const targetImage = '/src/content/4.png'; // Replace with your target image path
 
   return (
     <div className="container mx-auto py-8">
-      <h2 className="text-2xl font-bold mb-6 text-center">CSS Battle</h2>
       <div className="flex flex-wrap justify-between">
-        <div className="w-full sm:w-[500px] p-2">
+        {/* Make CodeEditor take 50% of the page width and remove padding on the left */}
+        <div className="w-full sm:w-[50%] pl-0 p-2">
           <CodeEditor onChange={setCombinedCode} />
         </div>
-        <div className="w-[435px] p-2">
+        {/* Adjust Output and Comparison to take the remaining space */}
+        <div className="w-full sm:w-[25%] p-2">
           <Output combinedCode={combinedCode} targetImage={targetImage} />
         </div>
-        <div>
-          <Comparison targetImage={targetImage}></Comparison>
+        <div className="w-full sm:w-[25%] p-2">
+          <Comparison targetImage={targetImage} />
         </div>
       </div>
     </div>
