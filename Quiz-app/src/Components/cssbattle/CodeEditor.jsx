@@ -3,19 +3,19 @@ import Editor from '@monaco-editor/react'; // Assuming you're using Monaco Edito
 
 const CodeEditor = ({ onChange }) => {
   const [code, setCode] = useState(`
+<div></div>
 <style>
-  .box {
+  div {
     width: 100px;
     height: 100px;
-    background-color: black;
+    background: #dd6b4d;
   }
 </style>
-<div class="box"></div>
   `);
 
   const handleEditorChange = (value) => {
     setCode(value);
-    onChange(value);
+    onChange(value); // Notify parent component of the code change
   };
 
   return (

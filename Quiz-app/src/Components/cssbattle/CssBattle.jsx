@@ -5,7 +5,7 @@ import Comparison from './Comparison';
 const CSSBattle = () => {
   const [combinedCode, setCombinedCode] = useState('');
 
-  const targetImage = '/src/content/3.png'; // Replace with your target image path
+  const targetImage = '/src/content/4.png'; // Replace with your target image path
 
   return (
     <div className="container mx-auto py-8">
