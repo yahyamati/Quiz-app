@@ -11,7 +11,7 @@ const ListCssImages = ({ url }) => {
   useEffect(() => {
     const fetchCssImages = async () => {
       try {
-        const response = await axios.get('http://localhost:4000/api/CssBattle/getall');
+        const response = await axios.get('https://quiz-app-backend-rdot.onrender.com/api/CssBattle/getall');
         setCssImages(response.data);
         setLoading(false);
       } catch (error) {
@@ -25,7 +25,7 @@ const ListCssImages = ({ url }) => {
   // Function to handle the removal of a 
   const handleRemove = async (id) => {
     try {
-      await axios.post(`http://localhost:4000/api/CssBattle/remove`, { id });
+      await axios.post(`https://quiz-app-backend-rdot.onrender.com/api/CssBattle/remove`, { id });
       setImages(Images.filter(image => image._id !== id));  
     } catch (error) {
       console.error("There was an error removing the image!", error);
