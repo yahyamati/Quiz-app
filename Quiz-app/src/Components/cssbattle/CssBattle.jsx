@@ -3,11 +3,9 @@ import { useLocation } from 'react-router-dom';
 import CodeEditor from './CodeEditor';
 import Output from './Output';
 import Comparison from './Comparison';
-
 const CSSBattle = () => {
   const [combinedCode, setCombinedCode] = useState('');
   const [remainingHeight, setRemainingHeight] = useState(0);
-  const headerHeight = document.querySelector('header')?.offsetHeight || 0;
   const location = useLocation();
   const targetImage = location.state?.targetImage; // Retrieve the targetImage from the location state
 
