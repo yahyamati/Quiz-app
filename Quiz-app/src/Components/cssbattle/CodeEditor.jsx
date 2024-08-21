@@ -71,7 +71,7 @@ const CodeEditor = ({ onChange, height }) => {
   return (
     <div className="relative flex flex-col ">
       {/* Navbar */}
-      <div className="bg-gray-800 text-white py-1 px-2 border-t border-gray-600">
+      <div id='header2' className="bg-gray-800 text-white py-1 px-2 border-t border-gray-600">
         <div className="flex justify-between items-center ">
           <h3 className="text-lg font-semibold">Editor</h3>
           <div className="flex items-center">

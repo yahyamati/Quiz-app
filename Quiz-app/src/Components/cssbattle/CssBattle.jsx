@@ -13,9 +13,10 @@ const CSSBattle = () => {
 
   useEffect(() => {
     const calculateRemainingHeight = () => {
-      const headerHeight = document.querySelector('header')?.offsetHeight || 0;
+      const headerHeight = document.getElementById('header')?.offsetHeight || 0;
+      const headerHeight2 = document.getElementById('header2')?.offsetHeight || 0;
       const windowHeight = window.innerHeight;
-      const availableHeight = windowHeight - headerHeight ;
+      const availableHeight = windowHeight - headerHeight -headerHeight2 ;
       setRemainingHeight(availableHeight);
     };
 
