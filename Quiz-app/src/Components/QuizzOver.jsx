@@ -51,7 +51,7 @@ export default QuizOver;
 // useWindowSize.js
 import { useState, useEffect } from 'react';
 
-const useWindowSize = () => {
+export const useWindowSize = () => {
   const [windowSize, setWindowSize] = useState({
     width: window.innerWidth,
     height: window.innerHeight,

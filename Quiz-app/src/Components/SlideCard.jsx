@@ -28,15 +28,15 @@ const SlideCard = () => {
   return (
     <div className='flex items-center justify-center flex-col h-[90vh] relative'>
     {/* Back to Home Page */}
-    <div className="absolute top-4 left-1/2 transform -translate-x-1/2">
-      <Link
-        to="/"
-        className="flex items-center gap-1 justify-center w-fit cursor-pointer text-gray-600 hover:underline underline-offset-2"
-      >
-        <IoArrowBackOutline className="size-5" />
-        <span className="font-semibold">Go back to Home Page</span>
-      </Link>
-    </div>
+    <div className="table mx-auto mt-6 relative bottom-10 sm:bottom-5">
+        <Link
+          to="/"
+          className="flex items-center gap-1 justify-center w-fit cursor-pointer text-gray-600 hover:underline underline-offset-2"
+        >
+          <IoArrowBackOutline className="size-5" />
+          <span className="font-semibold">Go back to Home Page</span>
+        </Link>
+      </div>
   
     {/* Main Content */}
     <div className="text-center">
@@ -68,10 +68,10 @@ const SlideCard = () => {
       speed={5000} // Speed for smooth sliding
       loop={true} // Makes the slider loop continuously
       modules={[FreeMode, Pagination, Autoplay]} // Add Autoplay to modules
-      className='max-w-[90%] lg:max-w-[80%]'
+      className='max-w-[90%] lg:max-w-[80%] shadow-2xl'
     >
       {Cssimages.map((image) => (
-        <SwiperSlide key={image._id}>
+        <SwiperSlide key={image._id} className=''>
           <div className='shadow-2xl bg-slate-800 flex flex-col justify-center gap-6 group relative text-white rounded-xl px-6 py-8 w-[215px] lg:h-[400px] lg:w-[350px] hover:scale-105 transition duration-500 ease-in-out'>
             <div>
               <img

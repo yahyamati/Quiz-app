@@ -1,6 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
+import html2canvas from 'html2canvas';
+import ImageComparison from './ImageComparison'; // Import the ImageComparison component
 
-const Output = ({ combinedCode, targetImage }) => {
+const Output = ({ combinedCode, targetImage,height }) => {
   const iframeRef = useRef(null);
   const [sliderPosition, setSliderPosition] = useState(100); // Default position at 100%
   const [isHovered, setIsHovered] = useState(false); // State for slider visibility
@@ -9,11 +11,13 @@ const Output = ({ combinedCode, targetImage }) => {
   const [opacity, setOpacity] = useState(1); // State for opacity
   const [isDragging, setIsDragging] = useState(false); // State for dragging
   const [sliderEnabled, setSliderEnabled] = useState(true); // State for slider enabled/disabled
+  const [comparisonImage, setComparisonImage] = useState(null); // State for the comparison image
+
+
 
   useEffect(() => {
     if (iframeRef.current && combinedCode) {
       const document = iframeRef.current.contentDocument;
-
       if (document) {
         // Extract the CSS from the combinedCode
         const cssMatch = combinedCode.match(/<style>([\s\S]*?)<\/style>/i);
@@ -102,6 +106,19 @@ const Output = ({ combinedCode, targetImage }) => {
     setSliderEnabled(prev => !prev);
   };
 
+  const compareImages = async () => {
+    const iframe = iframeRef.current;
+    if (!iframe) return;
+
+    const iframeDocument = iframe.contentDocument;
+    if (!iframeDocument) return;
+
+    // Use html2canvas to capture the iframe content
+    const canvas = await html2canvas(iframeDocument.body);
+    const outputImageSrc = canvas.toDataURL('image/png');
+    setComparisonImage(outputImageSrc);
+  };
+
   return (
     <div className="relative flex flex-col w-full h-full">
       {/* Navbar */}
@@ -125,7 +142,7 @@ const Output = ({ combinedCode, targetImage }) => {
       {/* Main Content */}
       <div className="flex-1 p-2 bg-gray-800 ">
         <div
-          className="relative w-full max-w-[700px] m-auto overflow-hidden "
+          className="relative w-full max-w-[700px] m-auto "
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
           onTouchStart={handleTouchStart}
@@ -143,7 +160,7 @@ const Output = ({ combinedCode, targetImage }) => {
           >
             <iframe
               ref={iframeRef}
-              className="w-full h-full border-none"
+              className="w-full h-full border-none" 
               title="Output Frame"
             />
           </div>
@@ -166,7 +183,21 @@ const Output = ({ combinedCode, targetImage }) => {
             )}
           </div>
         </div>
+        <div className='flex items-center  gap-10'>
+          <button
+              onClick={compareImages}
+              className="bg-black font-semibold px-4 py-2 rounded-md hover:bg-blue-900 text-white transition duration-500 ease-in-out text-center" 
+            >
+              Compare Images
+            </button>
+        {comparisonImage && (
+          <ImageComparison img1Src={targetImage} img2Src={comparisonImage} height={height} />
+      )}
+        </div>
+        
       </div>
+      {/* Image Comparison */}
+      
     </div>
   );
 };

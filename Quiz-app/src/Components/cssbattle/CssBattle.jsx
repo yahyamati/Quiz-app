@@ -38,7 +38,7 @@ const CSSBattle = () => {
           <CodeEditor onChange={setCombinedCode} height={remainingHeight} />
         </div>
         <div className="w-full sm:w-[30%]">
-          <Output combinedCode={combinedCode} targetImage={targetImage} />
+          <Output combinedCode={combinedCode} targetImage={targetImage} height={remainingHeight} />
         </div>
         <div className="w-full sm:w-[30%]">
           <Comparison targetImage={targetImage} />
