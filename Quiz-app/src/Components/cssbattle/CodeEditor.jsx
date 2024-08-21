@@ -1,8 +1,9 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Editor from '@monaco-editor/react';
 
 const CodeEditor = ({ onChange, height }) => {
-  const [code, setCode] = useState(`
+
+  const defaultCode = `
 <div></div>
 <style>
   div {
@@ -11,11 +12,21 @@ const CodeEditor = ({ onChange, height }) => {
     background: red;
   }
 </style>
-  `);
+  `;
+  const [code, setCode] = useState(() => {
+    const savedCode = localStorage.getItem('savedCode');
+    return savedCode || defaultCode;
+  });
 
   const [fontSize, setFontSize] = useState(14);
   const [showFontSize, setShowFontSize] = useState(false);
   const fontSizeRef = useRef(null);
+
+
+  // Save code to local storage whenever it changes
+  useEffect(() => {
+    localStorage.setItem('savedCode', code);
+  }, [code]);
 
   const handleEditorChange = (value) => {
     setCode(value);
@@ -31,7 +42,6 @@ const CodeEditor = ({ onChange, height }) => {
   };
 
   const editorDidMount = (editor) => {
-    // Set attributes for textarea
     const textarea = editor.getDomNode().querySelector('textarea');
     if (textarea) {
       textarea.setAttribute('autocorrect', 'off');
@@ -42,9 +52,8 @@ const CodeEditor = ({ onChange, height }) => {
       textarea.setAttribute('aria-multiline', 'true');
     }
 
-    // Configure the editor for suggestions
     editor.updateOptions({
-      wordBasedSuggestions: true, // Enable word-based suggestions
+      wordBasedSuggestions: true,
       quickSuggestions: {
         other: true,
         comments: true,
@@ -53,7 +62,6 @@ const CodeEditor = ({ onChange, height }) => {
     });
   };
 
-  // Click outside to close the font size settings panel
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (fontSizeRef.current && !fontSizeRef.current.contains(event.target)) {
@@ -70,7 +78,6 @@ const CodeEditor = ({ onChange, height }) => {
 
   return (
     <div className="relative flex flex-col ">
-      {/* Navbar */}
       <div id='header2' className="bg-gray-800 text-white py-1 px-2 border-t border-gray-600">
         <div className="flex justify-between items-center ">
           <h3 className="text-lg font-semibold">Editor</h3>
@@ -86,14 +93,13 @@ const CodeEditor = ({ onChange, height }) => {
         </div>
       </div>
 
-      {/* Font Size Settings */}
       {showFontSize && (
         <div
-          ref={fontSizeRef} // Attach ref to the font size settings panel
+          ref={fontSizeRef}
           className="absolute top-12 right-4 bg-gray-700 text-white p-4 rounded-md shadow-lg transition-opacity duration-300"
           style={{
             opacity: showFontSize ? 1 : 0,
-            zIndex: 100, // Ensure it is above everything else
+            zIndex: 100,
           }}
         >
           <div className="flex justify-between items-center">
@@ -111,7 +117,6 @@ const CodeEditor = ({ onChange, height }) => {
         </div>
       )}
 
-      {/* Editor */}
       <Editor
         height={`${height}px`}
         className="p-1 bg-slate-800 "
@@ -120,7 +125,7 @@ const CodeEditor = ({ onChange, height }) => {
         onChange={handleEditorChange}
         theme="vs-dark"
         options={{ fontSize }}
-        editorDidMount={editorDidMount} // Set the attributes and configure suggestions when editor mounts
+        editorDidMount={editorDidMount}
       />
     </div>
   );
