@@ -150,7 +150,7 @@ const Output = ({ combinedCode, targetImage,height }) => {
         >
           <img src={targetImage} alt="Target" className="w-full h-auto" />
           <div
-            className={`absolute top-0 left-0 right-0 h-full border ${isAnimating ? 'transition-clip' : ''}`}
+            className={`absolute top-0 left-0 right-0 h-full  ${isAnimating ? 'transition-clip' : ''}`}
             style={{
               clipPath: `inset(0 ${100 - sliderPosition}% 0 0)`,
               backgroundColor: `rgba(255, 255, 255, ${opacity})`, // Apply opacity

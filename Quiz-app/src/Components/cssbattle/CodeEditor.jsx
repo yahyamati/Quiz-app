@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useParams } from 'react-router-dom';
 import Editor from '@monaco-editor/react';
 
 const CodeEditor = ({ onChange, height }) => {
-
+  const { id } = useParams();
+  
   const defaultCode = `
 <div></div>
 <style>
@@ -13,8 +15,10 @@ const CodeEditor = ({ onChange, height }) => {
   }
 </style>
   `;
+
   const [code, setCode] = useState(() => {
-    const savedCode = localStorage.getItem('savedCode');
+    // Use ID to get the saved code from local storage
+    const savedCode = localStorage.getItem(`savedCode_${id}`);
     return savedCode || defaultCode;
   });
 
@@ -22,11 +26,13 @@ const CodeEditor = ({ onChange, height }) => {
   const [showFontSize, setShowFontSize] = useState(false);
   const fontSizeRef = useRef(null);
 
-
   // Save code to local storage whenever it changes
   useEffect(() => {
-    localStorage.setItem('savedCode', code);
-  }, [code]);
+    // Use ID to save the code in local storage
+    if (id) {
+      localStorage.setItem(`savedCode_${id}`, code);
+    }
+  }, [code, id]);
 
   const handleEditorChange = (value) => {
     setCode(value);
@@ -76,6 +82,7 @@ const CodeEditor = ({ onChange, height }) => {
     };
   }, []);
 
+
   return (
     <div className="relative flex flex-col ">
       <div id='header2' className="bg-gray-800 text-white py-1 px-2 border-t border-gray-600">
@@ -122,6 +129,7 @@ const CodeEditor = ({ onChange, height }) => {
         className="p-1 bg-slate-800 "
         defaultLanguage="html"
         value={code}
+        
         onChange={handleEditorChange}
         theme="vs-dark"
         options={{ fontSize }}
