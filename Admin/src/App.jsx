@@ -16,7 +16,7 @@ import CssImage from './pages/AddCssBattle/CssImage'
 import ListCssImages from './pages/ListCssImages/ListCssImages'
 
 function App() {
-  const url = "https://quiz-app-backend-rdot.onrender.com"; // Adjust this to your backend URL
+  const url = "https://quiz-app-backend-7w4o.onrender.com"; // Adjust this to your backend URL
   return (
       <div>   
         <ToastContainer />

@@ -15,7 +15,7 @@ const Add = () => {
     // Fetch categories on component mount
     const fetchCategories = async () => {
       try {
-        const response = await axios.get('https://quiz-app-backend-rdot.onrender.com/api/quiz/listCategory');
+        const response = await axios.get('https://quiz-app-backend-7w4o.onrender.com/api/quiz/listCategory');
         if (response.data.success) {
           setCategories(response.data.data); 
         } else {
@@ -46,7 +46,7 @@ const Add = () => {
     };
 
     try {
-      const response = await axios.post('https://quiz-app-backend-rdot.onrender.com/api/quiz/add', quizData);
+      const response = await axios.post('https://quiz-app-backend-7w4o.onrender.com/api/quiz/add', quizData);
       if (response.data.success) {
         toast.success(response.data.message);
         setQuestionText('');

@@ -21,7 +21,7 @@ const Article = () => {
         // Fetch categories on component mount
         const fetchCategories = async () => {
             try {
-                const response = await axios.get('https://quiz-app-backend-rdot.onrender.com/api/articles/listCategoryArticle');
+                const response = await axios.get('https://quiz-app-backend-7w4o.onrender.com/api/articles/listCategoryArticle');
                 if (response.data.success) {
                     setApiCategories(response.data.data); // Set categories from API response
                 } else {
@@ -68,7 +68,7 @@ const Article = () => {
         formData.append('category2', category2); // Add second category
 
         try {
-            const response = await axios.post('https://quiz-app-backend-rdot.onrender.com/api/articles/add', formData, {
+            const response = await axios.post('https://quiz-app-backend-7w4o.onrender.com/api/articles/add', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }

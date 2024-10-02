@@ -34,7 +34,7 @@ const CssImage = ({url}) => {
     formData.append('image', image);
 
     try {
-      const response = await axios.post(`https://quiz-app-backend-rdot.onrender.com/api/CssBattle/add`, formData, {
+      const response = await axios.post(`https://quiz-app-backend-7w4o.onrender.com/api/CssBattle/add`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

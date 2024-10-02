@@ -12,4 +12,4 @@ export const assets ={
 
 }
 
-export const url = 'https://quiz-app-backend-rdot.onrender.com'
+export const url = 'https://quiz-app-backend-7w4o.onrender.com'

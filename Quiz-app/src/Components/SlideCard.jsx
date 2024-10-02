@@ -15,7 +15,7 @@ const SlideCard = () => {
   useEffect(() => {
     const fetchCssImages = async () => {
       try {
-        const response = await axios.get('https://quiz-app-backend-rdot.onrender.com/api/CssBattle/getall');
+        const response = await axios.get('https://quiz-app-backend-7w4o.onrender.com/api/CssBattle/getall');
         setCssImages(response.data);
         setLoading(false);
       } catch (error) {

@@ -38,7 +38,7 @@ const AddCategoryArticle = () => {
     formData.append('Description', description);
 
     try {
-      const response = await axios.post('https://quiz-app-backend-rdot.onrender.com/api/articles/addCategoryArticle', formData, {
+      const response = await axios.post('https://quiz-app-backend-7w4o.onrender.com/api/articles/addCategoryArticle', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

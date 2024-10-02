@@ -34,7 +34,7 @@ const Category = () => {
     formData.append('image', image);
 
     try {
-      const response = await axios.post('https://quiz-app-backend-rdot.onrender.com/api/quiz/addCategory', formData, {
+      const response = await axios.post('https://quiz-app-backend-7w4o.onrender.com/api/quiz/addCategory', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

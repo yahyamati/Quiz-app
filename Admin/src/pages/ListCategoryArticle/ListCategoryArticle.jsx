@@ -10,7 +10,7 @@ const ListCategoryArticle = ({ url }) => {
     // Fetch categories on component mount
     const fetchCategories = async () => {
       try {
-        const response = await axios.get(`https://quiz-app-backend-rdot.onrender.com/api/articles/listCategoryArticle`);
+        const response = await axios.get(`https://quiz-app-backend-7w4o.onrender.com/api/articles/listCategoryArticle`);
         if (response.data.success) {
           setCategories(response.data.data);
         } else {
