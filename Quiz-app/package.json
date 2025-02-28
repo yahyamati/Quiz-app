@@ -16,6 +16,7 @@
     "codemirror": "^5.65.17",
     "html2canvas": "^1.4.1",
     "jimp": "^0.22.12",
+    "lucide-react": "^0.477.0",
     "marvinj": "^1.0.0",
     "posthog-js": "^1.155.4",
     "prettier": "^3.3.3",
